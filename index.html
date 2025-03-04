@@ -39,6 +39,29 @@
             text-align: center;
             margin-top: 20px;
         }
+        /* Banner Styles */
+        .banner {
+            width: 100%; /* Full width */
+            overflow: hidden; /* Prevents any overflow if image is too large */
+        }
+
+        .banner img {
+            width: 100%; /* Makes the image scale to the full width of the container */
+            height: auto; /* Keeps the aspect ratio intact */
+            display: block; /* Removes any space beneath the image */
+        }
+
+        /* Optional: Add some spacing or padding beneath the banner for aesthetics */
+        header + .banner {
+            margin-top: 20px; /* Adjust this as needed */
+        }
+
+        /* Responsive behavior (for mobile) */
+        @media (max-width: 768px) {
+            .banner img {
+                object-fit: cover; /* Ensures the image fills the container and may crop to fit */
+            }
+        }
     </style>
 </head>
 <body>
@@ -54,6 +77,11 @@
     <!-- Adopt Button -->
     <a href="URL_of_Adoption_Page" class="btn shadow-md">Adopt Now</a>
 </header>
+
+    <!-- Banner Section -->
+<div class="banner">
+    <img src="https://github.com/sabrinayusre/PurrfectMatch-AR/blob/3c0398aee9256a40b99d33f490f8018d88936f80/Assets/9489c15389b24e47936c58fb96e7341f.jpg" alt="Banner Image">
+</div>
     
     <!-- Augmented Reality Info -->
     <section class="bg-orange-300 p-6 text-center">
