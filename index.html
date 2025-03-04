@@ -6,6 +6,20 @@
     <title>Purrfect Match AR</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer"></script>
+    <!-- The following libraries and polyfills are recommended to maximize browser support -->
+    <!-- NOTE: you must adjust the paths as appropriate for your project -->
+    
+    <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
+<!--     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script> -->
+
+    <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
+<!--     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script> -->
+
+    <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
+<!--     <script src="https://unpkg.com/resize-observer-polyfill@1.5.0/dist/ResizeObserver.js"></script> -->
+    
+    <!-- 💁 OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
@@ -78,11 +92,58 @@
     <div class="text-center my-10">
         <button onclick="startAR()" class="btn bg-orange-500 text-white px-12 py-4 rounded-2xl shadow-md"> <b> Start AR </b></button>
     </div>
+
+    <!-- Model Selector -->
+      <div class="mb-6 text-center">
+        <label for="model-selector" class="text-lg font-medium">Choose a 3D Cat Model:</label>
+        <select id="model-selector" class="p-2 bg-yellow-100 rounded-md mt-2">
+          <option value=".glb">Cat Model 1</option>
+          <option value=".glb">Cat Model 2</option>
+          <option value=".glb">Cat Model 3</option>
+        </select>
+      </div>
+      
+      <!-- Model Viewer -->
+      <div class="text-center">
+        <model-viewer 
+          id="model-viewer"
+          src=".glb" 
+          alt="A 3D model of a cat"
+          camera-controls
+          auto-rotate
+          shadow-intensity="1" 
+          style="width: 100%; height: 500px;">
+        </model-viewer>
+      </div>
+    </div>
+
+    <script>
+      // Get the selector and the model-viewer element
+      const modelSelector = document.getElementById("model-selector");
+      const modelViewer = document.getElementById("model-viewer");
+
+      // Listen for changes to the selector
+      modelSelector.addEventListener("change", function () {
+        // Change the src attribute based on the selected option
+        const selectedModel = modelSelector.value;
+        modelViewer.setAttribute("src", selectedModel);
+      });
+    </script>
     
     <script>
         function startAR() {
             alert("AR experience launching...");
         }
     </script>
+<!-- Loads <model-viewer> for modern browsers: -->
+  <script type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+
+  <!-- Loads <model-viewer> for old browsers like IE11: -->
+  <script nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js">
+  </script>
+    
 </body>
 </html>
