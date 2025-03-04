@@ -3,23 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer"></script>
-    <!-- The following libraries and polyfills are recommended to maximize browser support -->
-    <!-- NOTE: you must adjust the paths as appropriate for your project -->
     
-    <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
-<!--     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script> -->
-
-    <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
-<!--     <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script> -->
-
-    <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
-<!--     <script src="https://unpkg.com/resize-observer-polyfill@1.5.0/dist/ResizeObserver.js"></script> -->
+    <!-- Load Model Viewer -->
+    <script type="module"
+        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+    </script>
     
-    <!-- 💁 OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
-    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -56,7 +47,8 @@
 <header class="hero flex items-center justify-between px-8">
     <!-- Logo -->
     <div class="flex items-center space-x-4">
-       <img src="https://github.com/sabrinayusre/PurrfectMatch-AR/blob/3e5a478fe0cf34bcc50b1a361bd0e0df5501c527/Assets/Purrfect.png" alt="Purrfect Match Logo" class="h-12">
+        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/Purrfect.png" 
+             alt="Purrfect Match Logo" class="h-12">
         <h1 class="text-2xl font-bold text-orange-600">PURRFECT MATCH</h1>
     </div>
 
@@ -67,26 +59,23 @@
     <!-- Augmented Reality Info -->
     <section class="bg-orange-300 p-6 text-center">
         <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
-        <p class="text-gray-800 text-sm mt-2">A technology that overlays digital information such as images, sounds, videos, or 3D objects onto the real world, enhancing the user’s perception of their physical environment.</p>
+        <p class="text-gray-800 text-sm mt-2">A technology that overlays digital 3D models onto the real world.</p>
     </section>
     
     <!-- Images Section -->
     <section class="flex justify-center space-x-6 mt-6">
-    <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
-        <img src="https://github.com/sabrinayusre/PurrfectMatch-AR/blob/3e5a478fe0cf34bcc50b1a361bd0e0df5501c527/Assets/tabby%201.png" alt="Image 1" class="w-full h-full object-cover rounded-lg">
-    </div>
-    <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
-        <img src="https://github.com/sabrinayusre/PurrfectMatch-AR/blob/3e5a478fe0cf34bcc50b1a361bd0e0df5501c527/Assets/siamese.png" alt="Image 2" class="w-full h-full object-cover rounded-lg">
-    </div>
-    <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
-        <img src="https://github.com/sabrinayusre/PurrfectMatch-AR/blob/3e5a478fe0cf34bcc50b1a361bd0e0df5501c527/Assets/calico.png" alt="Image 3" class="w-full h-full object-cover rounded-lg">
-    </div>
-</section>
-    
-    <!-- Note -->
-    <section class="text-center text-gray-700 text-sm mt-6">
-        <p>Note: Our models will only display a generic design for all types of cat breeds.</p>
-        <p class="mt-2">Most importantly, have fun with our AR felines!</p>
+        <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
+            <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png" 
+                 alt="Image 1" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
+            <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png" 
+                 alt="Image 2" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
+            <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png" 
+                 alt="Image 3" class="w-full h-full object-cover rounded-lg">
+        </div>
     </section>
     
     <!-- Start AR Button -->
@@ -95,59 +84,40 @@
     </div>
 
     <!-- Model Selector -->
-      <div class="mb-6 text-center">
+    <div class="mb-6 text-center">
         <label for="model-selector" class="text-lg font-medium">Choose a 3D Cat Model:</label>
         <select id="model-selector" class="p-2 bg-yellow-100 rounded-md mt-2">
-          <option value="Purrfect Match cat tabby.glb">Tabby Cat</option>
-          <option value="Purrfect Match cat siamese.glb">Siamese Cat</option>
-          <option value="Purrfect Match cat calico.glb">Calico Cat</option>
+          <option value="Assets/Purrfect Match cat tabby.glb">Tabby Cat</option>
+          <option value="Assets/Purrfect Match cat siamese.glb">Siamese Cat</option>
+          <option value="Assets/Purrfect Match cat calico.glb">Calico Cat</option>
         </select>
-      </div>
+    </div>
       
-      <!-- Model Viewer -->
-      <div class="text-center">
+    <!-- Model Viewer -->
+    <div class="text-center">
         <model-viewer 
           id="model-viewer"
-          src="Purrfect Match cat tabby.glb" <!-- Default model -->
-                        ios-src="Purrfect Match cat tabby.usdc" <!-- Model for iOS devices -->
-                        poster="tabby 1.png" <!-- Poster image -->
-                        alt="A 3D model of a cat"
-                        shadow-intensity="1"
-                        camera-controls
-                        auto-rotate
-                        ar
-                        style="width: 100%; height: 500px;">
+          src="Assets/Purrfect Match cat tabby.glb"
+          ios-src="Assets/Purrfect Match cat tabby.usdz"
+          poster="Assets/tabby 1.png"
+          alt="A 3D model of a cat"
+          shadow-intensity="1"
+          camera-controls
+          auto-rotate
+          ar
+          style="width: 100%; height: 500px;">
         </model-viewer>
-      </div>
     </div>
 
     <script>
-      // Get the selector and the model-viewer element
-      const modelSelector = document.getElementById("model-selector");
-      const modelViewer = document.getElementById("model-viewer");
+        document.getElementById("model-selector").addEventListener("change", function () {
+            document.getElementById("model-viewer").setAttribute("src", this.value);
+        });
 
-      // Listen for changes to the selector
-      modelSelector.addEventListener("change", function () {
-        // Change the src attribute based on the selected option
-        const selectedModel = modelSelector.value;
-        modelViewer.setAttribute("src", selectedModel);
-      });
-    </script>
-    
-    <script>
         function startAR() {
-            alert("AR experience launching...");
+            document.getElementById('model-viewer').activateAR();
         }
     </script>
-<!-- Loads <model-viewer> for modern browsers: -->
-  <script type="module"
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-  </script>
-
-  <!-- Loads <model-viewer> for old browsers like IE11: -->
-  <script nomodule
-      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js">
-  </script>
     
 </body>
 </html>
