@@ -158,44 +158,40 @@
     </div>
 
     <script>
-       <script>
     function startAR() {
         const modelViewer = document.getElementById("model-viewer");
-        const modelSrc = modelViewer.getAttribute("src");
-        const arLink = `https://arvr.google.com/scene-viewer/1.0?file=${window.location.origin}/${modelSrc}&mode=ar_preferred`;
 
+        // Check if the device supports AR and if it's a mobile device
         if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-            // 📱 Mobile: Open AR directly
-            window.location.href = arLink;
-        } else {
-            // 🖥️ Desktop: Try WebXR, or show QR Code fallback
-            if ("xr" in navigator) {
-                navigator.xr.isSessionSupported("immersive-ar").then((supported) => {
-                    if (supported) {
-                        modelViewer.activateAR();
-                    } else {
-                        showQRCode(arLink);
-                    }
+            // Mobile AR: Open the AR camera and show a message
+            alert("AR is starting...");
+            modelViewer.activateAR(); // Activates AR mode for mobile
+        } else if (navigator.xr) {
+            // Desktop AR: Use WebXR to start the AR session for desktop
+            alert("AR is starting... (on desktop)");
+
+            // Check for AR on Desktop (WebXR)
+            navigator.xr.requestDevice().then(device => {
+                device.requestSession({ immersive: true, environment: 'immersive-ar' })
+                .then(session => {
+                    // You can add WebXR-specific functionality here for desktop
+                    console.log("AR Session started on desktop!");
+                    // Add WebXR handling to show AR on desktop
+                    // For now, model-viewer AR is used for desktop
+                    modelViewer.enterXR(); // Trigger AR for desktop as well
+                }).catch(err => {
+                    alert("AR is not supported on this desktop device.");
                 });
-            } else {
-                showQRCode(arLink);
-            }
+            }).catch(err => {
+                alert("WebXR is not supported on this browser.");
+            });
+        } else {
+            // Fallback: Inform user if AR is not supported on their device
+            alert("AR is not supported on your device.");
         }
     }
+</script>
 
-    function showQRCode(url) {
-        const qrContainer = document.createElement("div");
-        qrContainer.innerHTML = `
-            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                        background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-                <p>Scan this QR code to open AR on your phone:</p>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(url)}" alt="QR Code">
-                <br><button onclick="this.parentElement.remove()">Close</button>
-            </div>
-        `;
-        document.body.appendChild(qrContainer);
-    }   
-    </script>
     
 </body>
 </html>
