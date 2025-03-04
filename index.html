@@ -143,19 +143,21 @@
         });
 
         function startAR() {
+            // Check if the WebXR API is available (which is commonly for mobile AR)
             if (navigator.xr) {
-                // Check for WebXR availability for AR on Desktop (if supported)
                 navigator.xr.requestDevice().then(device => {
                     device.requestSession({ immersive: true, environment: 'immersive-ar' })
                     .then(session => {
-                        // Start AR session
                         console.log("AR Session Started");
                     }).catch(err => {
                         alert("AR is not supported on this device.");
                     });
                 });
             } else {
-                alert("WebXR is not supported on this browser.");
+                // Desktop fallback to showing the model in a simulated AR-like experience
+                alert("AR on Desktop is limited. Starting simulation...");
+                document.querySelector("model-viewer").setAttribute("ar", "true");
+                document.querySelector("model-viewer").style.display = "block"; // Show model
             }
         }
         
