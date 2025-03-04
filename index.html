@@ -80,7 +80,7 @@
 
     <!-- Banner Section -->
 <div class="banner">
-    <img src="https://rawgithubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/9489c15389b24e47936c58fb96e7341f.jpg" alt="9489c15389b24e47936c58fb96e7341f">
+    <img src="Assets/9489c15389b24e47936c58fb96e7341f.jpg" alt="Banner Image" class="w-full h-auto">
 </div>
     
     <!-- Augmented Reality Info -->
@@ -142,8 +142,23 @@
         });
 
         function startAR() {
-            document.getElementById('model-viewer').activateAR();
-        }
+            if (navigator.xr) {
+                // Check for WebXR availability for AR on Desktop (if supported)
+                navigator.xr.requestDevice().then(device => {
+                    device.requestSession({ immersive: true, environment: 'immersive-ar' })
+                    .then(session => {
+                        // Start AR session
+                        console.log("AR Session Started");
+                    }).catch(err => {
+                        alert("AR is not supported on this device.");
+                    });
+                });
+            } else {
+                alert("WebXR is not supported on this browser.");
+            }
+        } else {document.getElementById('model-viewer').activateAR();
+               }
+        
     </script>
     
 </body>
