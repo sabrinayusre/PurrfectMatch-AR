@@ -29,7 +29,6 @@
             border-radius: 20px;
             font-weight: bold;
             transition: 0.3s;
-            width: 250px;
         }
         .adopt-btn:hover {
             background-color: #FF9800;
@@ -154,21 +153,29 @@
         });
 
         function startAR() {
-            // Check if the WebXR API is available (which is commonly for mobile AR)
-            if (navigator.xr) {
-                navigator.xr.requestDevice().then(device => {
-                    device.requestSession({ immersive: true, environment: 'immersive-ar' })
-                    .then(session => {
-                        console.log("AR Session Started");
-                    }).catch(err => {
-                        alert("AR is not supported on this device.");
+            if (window.innerWidth >= 768) {
+                // Desktop: Check if WebXR is supported
+                if (navigator.xr) {
+                    navigator.xr.requestDevice().then(device => {
+                        device.requestSession({ immersive: true, environment: 'immersive-ar' })
+                        .then(session => {
+                            // Start AR session
+                            console.log("AR Session Started on Desktop");
+                        }).catch(err => {
+                            alert("AR is not supported on this device.");
+                        });
                     });
-                });
+                } else {
+                    alert("WebXR is not supported on this browser.");
+                }
             } else {
-                // Desktop fallback to showing the model in a simulated AR-like experience
-                alert("AR on Desktop is limited. Starting simulation...");
-                document.querySelector("model-viewer").setAttribute("ar", "true");
-                document.querySelector("model-viewer").style.display = "block"; // Show model
+                // Mobile: Use Model Viewer to launch AR
+                const modelViewer = document.querySelector("model-viewer");
+                if (modelViewer) {
+                    modelViewer.enterAR();
+                } else {
+                    alert("AR is not supported on this mobile device.");
+                }
             }
         }
         
