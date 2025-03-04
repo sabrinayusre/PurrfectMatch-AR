@@ -23,27 +23,36 @@
             justify-content: space-between;
             align-items: center;
         }
-        .adopt-btn {
-            background-color: #FFB74D;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .adopt-btn:hover {
-            background-color: #FF9800;
-        }
-        .start-ar-btn {
-            background-color: #FFB74D;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            transition: 0.3s;
-            width: 250px;
-        }
-        .start-ar-btn:hover {
-            background-color: #FF9800;
-        }
+        /* General Button Styling */
+    .btn {
+    font-weight: bold;
+    transition: 0.3s;
+    padding: 12px 24px;
+    border-radius: 20px;
+    }
+
+    /* Adopt Now Button (Yellow) */
+    .btn-yellow {
+    background-color: #FFB74D;
+    color: black;
+    }
+
+    .btn-yellow:hover {
+    background-color: #FF9800;
+    }
+
+    /* Start AR Button (Orange) */
+    .btn-orange {
+    background-color: #FF9800;
+    color: white;
+    border-radius: 20px; /* Ensures rounded corners */
+    width: 250px; /* Fixed width for better visibility */
+    }
+
+    .btn-orange:hover {
+    background-color: #E68900;
+    }
+
         .section-title {
             font-size: 24px;
             font-weight: bold;
@@ -86,7 +95,7 @@
     </div>
 
     <!-- Adopt Button -->
-    <a href="URL_of_Adoption_Page" class="btn shadow-md">Adopt Now</a>
+    <a href="URL_of_Adoption_Page" class="btn btn-yellow shadow-md">Adopt Now</a>
 </header>
 
     <!-- Banner Section -->
@@ -118,8 +127,9 @@
     
     <!-- Start AR Button -->
     <div class="text-center my-10">
-        <button onclick="startAR()" class="btn bg-orange-500 text-white px-12 py-4 rounded-2x1 shadow-md"> <b> Start AR </b></button>
-    </div>
+    <button onclick="startAR()" class="btn btn-orange shadow-md"> <b> Start AR </b></button>
+</div>
+
     
     <!-- Model Selector -->
     <div class="mb-6 text-center">
