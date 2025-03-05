@@ -50,6 +50,23 @@
             width: 20px;
             margin-left: 10px;
         }
+        .img-wrapper {
+    width: 250px; /* Fixed width for consistency */
+    height: 250px; /* Fixed height */
+    background-color: #FFD700; /* Yellow border */
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-responsive {
+    width: 90%; /* Slight padding inside the border */
+    height: auto;
+    max-height: 90%; /* Ensures image doesn't overflow */
+    object-fit: contain; /* Keeps the image inside without cropping */
+}
+
     </style>
 </head>
 <body>
@@ -71,20 +88,21 @@
     <p class="text-gray-800 text-sm mt-2">A technology that overlays digital information such as images, sounds, videos, or 3D objects onto the real world.</p>
 </section>
     
-<section class="flex justify-center space-x-6 mt-6">
-    <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
+<section class="images-container mt-6">
+    <div class="img-wrapper">
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png" 
-             alt="Tabby Cat" class="max-w-full max-h-64 object-contain rounded-lg">
+             alt="Image 1" class="img-responsive">
     </div>
-    <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
+    <div class="img-wrapper">
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png" 
-             alt="Siamese Cat" class="max-w-full max-h-64 object-contain rounded-lg">
+             alt="Image 2" class="img-responsive">
     </div>
-    <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
+    <div class="img-wrapper">
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png" 
-             alt="Calico Cat" class="max-w-full max-h-64 object-contain rounded-lg">
+             alt="Image 3" class="img-responsive">
     </div>
 </section>
+
     
 <div class="text-center my-10">
     <button onclick="startAR()" class="btn btn-orange shadow-md"> <b> Start AR </b></button>
@@ -138,7 +156,7 @@
         1. Click the "Start AR" button to begin. <br>
         2. Allow camera access when prompted. <br>
         3. Point your camera at a flat surface to place the 3D cat. <br>
-        4. Use touch gestures to zoom, rotate, or move the model.
+        4. Use touch gestures to zoom, rotate, or move the model. <br>
         Note: It is recommended to experience AR using your mobile phones.
     </p>
     <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
