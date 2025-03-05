@@ -114,17 +114,35 @@
 <section class="flex justify-center space-x-6 mt-6">
     <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png" 
-             alt="Image 1" class="max-w-full max-h-64 object-contain rounded-lg">
+             alt="Image 1" class="max-w-full max-h-64 object-contain rounded-lg img-responsive">
     </div>
     <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png" 
-             alt="Image 2" class="max-w-full max-h-64 object-contain rounded-lg">
+             alt="Image 2" class="max-w-full max-h-64 object-contain rounded-lg img-responsive">
     </div>
     <div class="bg-yellow-400 p-10 rounded-lg shadow-md">
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png" 
-             alt="Image 3" class="max-w-full max-h-64 object-contain rounded-lg">
+             alt="Image 3" class="max-w-full max-h-64 object-contain rounded-lg img-responsive">
     </div>
 </section>
+
+<style>
+    /* Ensure images do not shrink too much on mobile */
+    .img-responsive {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Prevent shrinking on mobile view */
+    @media (max-width: 768px) {
+        .img-responsive {
+            max-width: 100%; /* Keeps the image's max width */
+            max-height: 300px; /* Set a maximum height to prevent excessive shrinking */
+        }
+    }
+</style>
+
 
 
     
