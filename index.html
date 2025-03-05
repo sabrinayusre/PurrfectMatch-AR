@@ -142,9 +142,6 @@
         }
     }
 </style>
-
-
-
     
     <!-- Start AR Button -->
     <div class="text-center my-10">
@@ -184,6 +181,9 @@
             modelViewer.setAttribute("src", this.value);
         });
 
+            <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑ Top</button>
+        
         function startAR() {
             const modelViewer = document.getElementById("model-viewer");
 
@@ -214,9 +214,6 @@
                 alert("AR is not supported on your device.");
             }
         }
-
-        <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑ Top</button>
 
      window.addEventListener("scroll", function() {
             var backToTopButton = document.getElementById("backToTop");
