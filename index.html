@@ -24,34 +24,34 @@
             align-items: center;
         }
         /* General Button Styling */
-    .btn {
-    font-weight: bold;
-    transition: 0.3s;
-    padding: 12px 24px;
-    border-radius: 20px;
-    }
+        .btn {
+            font-weight: bold;
+            transition: 0.3s;
+            padding: 12px 24px;
+            border-radius: 20px;
+        }
 
-    /* Adopt Now Button (Yellow) */
-    .btn-yellow {
-    background-color: #FFB74D;
-    color: black;
-    }
+        /* Adopt Now Button (Yellow) */
+        .btn-yellow {
+            background-color: #FFB74D;
+            color: black;
+        }
 
-    .btn-yellow:hover {
-    background-color: #FF9800;
-    }
+        .btn-yellow:hover {
+            background-color: #FF9800;
+        }
 
-    /* Start AR Button (Orange) */
-    .btn-orange {
-    background-color: #FF9800;
-    color: white;
-    border-radius: 20px; /* Ensures rounded corners */
-    width: 250px; /* Fixed width for better visibility */
-    }
+        /* Start AR Button (Orange) */
+        .btn-orange {
+            background-color: #FF9800;
+            color: white;
+            border-radius: 20px; /* Ensures rounded corners */
+            width: 250px; /* Fixed width for better visibility */
+        }
 
-    .btn-orange:hover {
-    background-color: #E68900;
-    }
+        .btn-orange:hover {
+            background-color: #E68900;
+        }
 
         .section-title {
             font-size: 24px;
@@ -59,6 +59,7 @@
             text-align: center;
             margin-top: 20px;
         }
+
         /* Banner Styles */
         .banner {
             width: 100%; /* Full width */
@@ -127,10 +128,9 @@
     
     <!-- Start AR Button -->
     <div class="text-center my-10">
-    <button onclick="startAR()" class="btn btn-orange shadow-md"> <b> Start AR </b></button>
-</div>
+        <button onclick="startAR()" class="btn btn-orange shadow-md"> <b> Start AR </b></button>
+    </div>
 
-    
     <!-- Model Selector -->
     <div class="mb-6 text-center">
         <label for="model-selector" class="text-lg font-medium">Choose a 3D Cat Model:</label>
@@ -158,40 +158,43 @@
     </div>
 
     <script>
-    function startAR() {
-        const modelViewer = document.getElementById("model-viewer");
+        // Function to switch models based on the dropdown selection
+        document.getElementById("model-selector").addEventListener("change", function () {
+            const modelViewer = document.getElementById("model-viewer");
+            modelViewer.setAttribute("src", this.value);
+        });
 
-        // Check if the device supports AR and if it's a mobile device
-        if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-            // Mobile AR: Open the AR camera and show a message
-            alert("AR is starting...");
-            modelViewer.activateAR(); // Activates AR mode for mobile
-        } else if (navigator.xr) {
-            // Desktop AR: Use WebXR to start the AR session for desktop
-            alert("AR is starting... (on desktop)");
+        function startAR() {
+            const modelViewer = document.getElementById("model-viewer");
 
-            // Check for AR on Desktop (WebXR)
-            navigator.xr.requestDevice().then(device => {
-                device.requestSession({ immersive: true, environment: 'immersive-ar' })
-                .then(session => {
-                    // You can add WebXR-specific functionality here for desktop
-                    console.log("AR Session started on desktop!");
-                    // Add WebXR handling to show AR on desktop
-                    // For now, model-viewer AR is used for desktop
-                    modelViewer.enterXR(); // Trigger AR for desktop as well
+            // Check if the device supports AR and if it's a mobile device
+            if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+                // Mobile AR: Open the AR camera and show a message
+                alert("AR is starting...");
+                modelViewer.activateAR(); // Activates AR mode for mobile
+            } else if (navigator.xr) {
+                // Desktop AR: Use WebXR to start the AR session for desktop
+                alert("AR is starting... (on desktop)");
+
+                // Check for AR on Desktop (WebXR)
+                navigator.xr.requestDevice().then(device => {
+                    device.requestSession({ immersive: true, environment: 'immersive-ar' })
+                    .then(session => {
+                        // You can add WebXR-specific functionality here for desktop
+                        console.log("AR Session started on desktop!");
+                        modelViewer.enterXR(); // Trigger AR for desktop as well
+                    }).catch(err => {
+                        alert("AR is not supported on this desktop device.");
+                    });
                 }).catch(err => {
-                    alert("AR is not supported on this desktop device.");
+                    alert("WebXR is not supported on this browser.");
                 });
-            }).catch(err => {
-                alert("WebXR is not supported on this browser.");
-            });
-        } else {
-            // Fallback: Inform user if AR is not supported on their device
-            alert("AR is not supported on your device.");
+            } else {
+                // Fallback: Inform user if AR is not supported on their device
+                alert("AR is not supported on your device.");
+            }
         }
-    }
-</script>
+    </script>
 
-    
 </body>
 </html>
