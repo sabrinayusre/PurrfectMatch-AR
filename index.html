@@ -214,8 +214,26 @@
                 alert("AR is not supported on your device.");
             }
         }
+
+        <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" onclick="scrollToTop()">↑ Top</button>
+
+     window.addEventListener("scroll", function() {
+            var backToTopButton = document.getElementById("backToTop");
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
     </script>
 
+    
     <!-- Help Section Below Model Viewer -->
 <div class="bg-orange-600 text-white p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
     <h2 class="text-lg font-bold">How to Use AR</h2>
