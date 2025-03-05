@@ -141,6 +141,16 @@
             max-height: 300px; /* Set a maximum height to prevent excessive shrinking */
         }
     }
+.ar-instructions {
+            display: flex;
+            align-items: center;
+        }
+
+        .ar-instructions img {
+            width: 20px; /* Adjust the size of the image */
+            height: auto;
+            margin-left: 10px; /* Adds space between the text and image */
+        }
 </style>
     
     <!-- Start AR Button -->
@@ -233,7 +243,9 @@
     
     <!-- Help Section Below Model Viewer -->
 <div class="bg-orange-600 text-white p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
-    <h2 class="text-lg font-bold">How to Use AR</h2>
+    <div class="ar-instructions">
+        <img src="Assets/help-252.png" alt="Help Icon">
+    </div><h2 class="text-lg font-bold">How to Use AR</h2>
     <p class="mt-2 text-sm">
         1. Click the "Start AR" button to begin. <br>
         2. Allow camera access when prompted. <br>
