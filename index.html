@@ -167,5 +167,28 @@
     <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
 </div>
 
+    <!-- Back to Top Button -->
+<button onclick="scrollToTop()" id="backToTopBtn" 
+    class="fixed bottom-6 right-6 bg-yellow-400 text-black font-bold py-2 px-4 rounded-full shadow-md hidden">
+    ↑ Top
+</button>
+
+<script>
+    // Show/hide button on scroll
+    window.onscroll = function () {
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            backToTopBtn.classList.remove("hidden");
+        } else {
+            backToTopBtn.classList.add("hidden");
+        }
+    };
+
+    // Smooth scroll to top
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+</script>
+
 </body>
 </html>
