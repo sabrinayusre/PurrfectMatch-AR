@@ -66,6 +66,22 @@
     max-height: 90%; /* Ensures image doesn't overflow */
     object-fit: contain; /* Keeps the image inside without cropping */
 }
+        .images-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.image {
+  width: 300px;  /* Fixed size for the images */
+  height: auto;
+  object-fit: cover;
+  margin: 0 10px;  /* Space between images */
+  border-radius: 10px;
+}
+
 .flashcards-container {
   display: flex;
   justify-content: space-around;
