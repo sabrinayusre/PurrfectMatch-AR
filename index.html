@@ -49,41 +49,42 @@
         .ar-instructions img {
             width: 20px;
             margin-left: 10px;
-        }
-        .img-wrapper {
-    width: 250px; /* Fixed width for consistency */
-    height: 250px; /* Fixed height */
-    background-color: #FFD700; /* Yellow border */
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+       /* Container for the images */
+.images-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  width: 100%;
+  margin-bottom: 20px;  /* Adds space between images and the note */
 }
 
-.img-responsive {
-    width: 90%; /* Slight padding inside the border */
-    height: auto;
-    max-height: 90%; /* Ensures image doesn't overflow */
-    object-fit: contain; /* Keeps the image inside without cropping */
-} 
+/* Styling for each image */
+.image {
+  width: 33%;  /* Adjust the width of each image */
+  height: auto;
+  object-fit: cover;  /* Ensures the images don’t stretch */
+  margin: 0 10px;  /* Space between images */
+  border-radius: 10px;
+}
 
-        .note-container {
+/* Container for the note */
+.note-container {
   text-align: center;
   margin-top: 20px;  /* Adds space above the note text */
-  padding: 10px;
+  width: 100%;
+  padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
-  width: 80%;  /* Make the note container responsive */
-  margin-left: auto;
-  margin-right: auto;
 }
 
+/* Styling the note text */
 .note-container p {
   font-size: 16px;
   color: #333;
   line-height: 1.6;
-  font-style: italic; 
 }
+
     </style>
 </head>
 <body>
