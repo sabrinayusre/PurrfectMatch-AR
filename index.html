@@ -62,15 +62,18 @@
 /* Container for the images */
 .images-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center;  /* Center the images horizontally */
+    align-items: center;  /* Center the images vertically */
     margin-top: 30px;
-    width: 100%;
     margin-bottom: 20px;  /* Adds space between images and the note */
+    width: 100%;
     box-sizing: border-box;
     gap: 10px; /* Space between the images */
-    max-width: 1000px;  /* Set max width to prevent stretching */
-    flex-wrap: wrap;  /* Allow wrapping */
+    flex-wrap: wrap;  /* Allow wrapping if necessary */
+    justify-content: center; /* Ensures the images are centered */
+    max-width: 1000px; /* Optional: Set max width to prevent them from stretching too wide */
+    margin-left: auto;  /* Centers the container horizontally */
+    margin-right: auto; /* Centers the container horizontally */
 }
 
 /* Styling for each image */
@@ -83,7 +86,6 @@
     border: 5px solid yellow;  /* Adding a yellow border */
     box-sizing: border-box;  /* Make sure padding/borders are considered in the width */
 }
-
 
 
 /* Container for the note */
