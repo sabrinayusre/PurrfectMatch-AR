@@ -117,43 +117,51 @@
         <option value="Assets/Purrfect Match Calico.glb">Calico Cat</option>
     </select>
 </div>
-  
-<div class="text-center">
-    <model-viewer 
-    id="model-viewer"
-    src="Assets/Purrfect Match Tuxedo.glb"
-    ios-src="Assets/Purrfect Match Tuxedo.usdz"
-    poster="Assets/tabby 1.png"
-    alt="A 3D model of a cat"
-    shadow-intensity="1"
-    camera-controls
-    auto-rotate
-    ar
-    ar-modes="webxr scene-viewer quick-look"
-    ar-scale="fixed"
-    style="width: 100%; height: 500px;">
-</model-viewer>
 
-</div>
-
-<script>
+    <script>
     document.getElementById("model-selector").addEventListener("change", function () {
-        document.getElementById("model-viewer").setAttribute("src", this.value);
+        const selectedModel = this.value;
+        const modelViewer = document.getElementById("model-viewer");
+
+        // Define matching .glb and .usdz files
+        const models = {
+            "Assets/Purrfect Match Tuxedo.glb": {
+                glb: "Assets/Purrfect Match Tuxedo.glb",
+                usdz: "Assets/Purrfect Match Tuxedo.usdz"
+            },
+            "Assets/Purrfect Match Siamese.glb": {
+                glb: "Assets/Purrfect Match Siamese.glb",
+                usdz: "Assets/Purrfect Match Siamese.usdz"
+            },
+            "Assets/Purrfect Match Calico.glb": {
+                glb: "Assets/Purrfect Match Calico.glb",
+                usdz: "Assets/Purrfect Match Calico.usdz"
+            }
+        };
+
+        // Update both GLB & USDZ sources
+        modelViewer.setAttribute("src", models[selectedModel].glb);
+        modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
     });
-    
+
     function startAR() {
         const modelViewer = document.getElementById("model-viewer");
 
-        if (modelViewer.canActivateAR) {
-            modelViewer.activateAR(); // WebXR (native browser support)
+        // Check if AR mode is supported
+        if (modelViewer.hasAttribute("ar")) {
+            modelViewer.activateAR();  // Use native WebXR if supported
         } else {
-            // Fallback for unsupported browsers (Android/iOS)
-            const arUrl = modelViewer.getAttribute("ios-src") || modelViewer.getAttribute("src");
-            window.open(arUrl, "_blank"); 
+            // Open AR file manually (Android: GLB, iPhone: USDZ)
+            const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+                ? modelViewer.getAttribute("ios-src") 
+                : modelViewer.getAttribute("src");
+
+            window.open(arUrl, "_blank");
         }
     }
-
 </script>
+
+
     
 <div class="bg-yellow-400 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
     <div class="ar-instructions">
