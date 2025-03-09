@@ -118,6 +118,23 @@
     </select>
 </div>
 
+    <div class="flex justify-center my-10">
+    <model-viewer 
+        id="model-viewer"
+        src="Assets/Purrfect Match Tuxedo.glb"
+        ios-src="Assets/Purrfect Match Tuxedo.usdz"
+        alt="A 3D model of a cat"
+        poster="Assets/tabby 1.png"
+        shadow-intensity="1"
+        camera-controls
+        auto-rotate
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        ar-scale="auto"
+        style="width: 100%; max-width: 500px; height: 500px;">
+    </model-viewer>
+</div>
+
     <script>
     document.getElementById("model-selector").addEventListener("change", function () {
         const selectedModel = this.value;
