@@ -67,89 +67,23 @@
     object-fit: contain; /* Keeps the image inside without cropping */
 } 
 
-.flashcards-container {
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  padding: 0 10px;
-  width: 100%;
-  box-sizing: border-box;
-  flex-wrap: wrap;  /* Allow the cards to wrap on smaller screens */
-}
-
-.flashcard {
-  width: 22%;  /* Make the flashcards responsive, adjusting based on the screen size */
-  height: 300px;
-  perspective: 1000px;
-  margin-bottom: 20px;  /* Add space between rows when they wrap */
-  position: relative;
-}
-
-.flashcard .flashcard-front, .flashcard .flashcard-back {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  backface-visibility: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  color: #fff;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  background-color: #f1f1f1;
-  overflow: hidden;  /* Prevent the text from overflowing the container */
-}
-
-.flashcard .flashcard-front {
-  background-color: #ff6f61;
-  color: white;
-  font-weight: bold;
-  transform: rotateY(0deg);
-  transition: transform 0.6s;
-  word-wrap: break-word;  /* Ensure long words break and wrap to the next line */
-}
-
-.flashcard .flashcard-back {
-  background-color: #f5a623;
-  color: black;
-  transform: rotateY(180deg);
-  padding: 10px;
+        .note-container {
   text-align: center;
-  word-wrap: break-word;
+  margin-top: 20px;  /* Adds space above the note text */
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  width: 80%;  /* Make the note container responsive */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.flashcard:hover .flashcard-front {
-  transform: rotateY(180deg);
+.note-container p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  font-style: italic; 
 }
-
-.flashcard:hover .flashcard-back {
-  transform: rotateY(360deg);
-}
-
-/* Ensure text doesn't overflow and remains inside the card */
-.flashcard .flashcard-front h3, .flashcard .flashcard-back p {
-  overflow: hidden;
-  text-overflow: ellipsis; /* Add ellipsis if the text overflows */
-  word-wrap: break-word;
-  white-space: normal; /* Allow text to wrap */
-}
-
-@media (max-width: 768px) {
-  .flashcard {
-    width: 45%;  /* Flashcards will take up less space on smaller screens */
-  }
-}
-
-@media (max-width: 480px) {
-  .flashcard {
-    width: 90%;  /* Flashcards will take up most of the screen on very small devices */
-  }
-}
-
-
     </style>
 </head>
 <body>
@@ -170,45 +104,6 @@
     <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
     <p class="text-gray-800 text-sm mt-2">A technology that overlays digital information such as images, sounds, videos, or 3D objects onto the real world.</p>
 </section>
-
-    <div class="flashcards-container">
-  <div class="flashcard" id="card1">
-    <div class="flashcard-front">
-      <h3>Immersive Experience</h3>
-    </div>
-    <div class="flashcard-back">
-      <p>AR allows users to interact with 3D models in their real-world environment, visualizing cats in their homes or outdoor spaces for better-informed adoption decisions.</p>
-    </div>
-  </div>
-  
-  <div class="flashcard" id="card2">
-    <div class="flashcard-front">
-      <h3>Convenience</h3>
-    </div>
-    <div class="flashcard-back">
-      <p>AR is accessible through mobile devices, enabling users to explore and interact with cats anytime, anywhere, without the need for specialized equipment.</p>
-    </div>
-  </div>
-
-  <div class="flashcard" id="card3">
-    <div class="flashcard-front">
-      <h3>Interactive Decision-Making</h3>
-    </div>
-    <div class="flashcard-back">
-      <p>AR empowers users to zoom, rotate, and explore the 3D models from various angles, providing a more detailed understanding of the cats before adoption.</p>
-    </div>
-  </div>
-
-  <div class="flashcard" id="card4">
-    <div class="flashcard-front">
-      <h3>Increased Engagement</h3>
-    </div>
-    <div class="flashcard-back">
-      <p>Incorporating AR sparks curiosity and creates a fun, educational tool to engage users with the adoption process and stray animal management in a creative way.</p>
-    </div>
-  </div>
-</div>
-
     
 <section class="images-container mt-6 flex justify-center gap-4 flex-wrap">
     <div class="img-wrapper">
