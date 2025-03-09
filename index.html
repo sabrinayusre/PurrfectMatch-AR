@@ -50,6 +50,8 @@
             width: 20px;
             margin-left: 10px;
        /* Container for the images */
+
+  /* Container for the images */
 .images-container {
   display: flex;
   justify-content: center;
@@ -57,15 +59,18 @@
   margin-top: 30px;
   width: 100%;
   margin-bottom: 20px;  /* Adds space between images and the note */
+  box-sizing: border-box;
 }
 
 /* Styling for each image */
 .image {
-  width: 33%;  /* Adjust the width of each image */
+  width: 30%;  /* Adjust the width of each image (not too large) */
   height: auto;
   object-fit: cover;  /* Ensures the images don’t stretch */
   margin: 0 10px;  /* Space between images */
   border-radius: 10px;
+  border: 5px solid yellow;  /* Adding a yellow border */
+  box-sizing: border-box;  /* Make sure padding/borders are considered in the width */
 }
 
 /* Container for the note */
@@ -76,6 +81,7 @@
   padding: 20px;
   background-color: #f5f5f5;
   border-radius: 10px;
+  box-sizing: border-box;
 }
 
 /* Styling the note text */
@@ -84,6 +90,7 @@
   color: #333;
   line-height: 1.6;
 }
+
 
     </style>
 </head>
