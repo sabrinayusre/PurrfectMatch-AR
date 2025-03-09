@@ -69,17 +69,21 @@
     margin-bottom: 20px;  /* Adds space between images and the note */
     box-sizing: border-box;
     gap: 10px; /* Space between the images */
+    max-width: 1000px;  /* Set max width to prevent stretching */
+    flex-wrap: wrap;  /* Allow wrapping */
 }
 
 /* Styling for each image */
-.img-responsive {
-    width: 30%;  /* Adjust the width of each image (not too large) */
+.image {
+    width: 100%;  /* Ensure the image takes up full space of its container */
+    max-width: 300px;  /* Limit the max width of the images */
     height: auto;
     object-fit: cover;  /* Ensures the images don’t stretch */
     border-radius: 10px;
     border: 5px solid yellow;  /* Adding a yellow border */
     box-sizing: border-box;  /* Make sure padding/borders are considered in the width */
 }
+
 
 
 /* Container for the note */
