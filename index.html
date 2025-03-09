@@ -66,6 +66,57 @@
     max-height: 90%; /* Ensures image doesn't overflow */
     object-fit: contain; /* Keeps the image inside without cropping */
 }
+.flashcards-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.flashcard {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flashcard .flashcard-front, .flashcard .flashcard-back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+}
+
+.flashcard .flashcard-front {
+  background-color: #ff6f61;
+  color: white;
+  font-weight: bold;
+  transform: rotateY(0deg);
+  transition: transform 0.6s;
+}
+
+.flashcard .flashcard-back {
+  background-color: #f5a623;
+  color: black;
+  transform: rotateY(180deg);
+  padding: 10px;
+  text-align: center;
+}
+
+.flashcard:hover .flashcard-front {
+  transform: rotateY(180deg);
+}
+
+.flashcard:hover .flashcard-back {
+  transform: rotateY(360deg);
+}
 
     </style>
 </head>
@@ -87,6 +138,45 @@
     <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
     <p class="text-gray-800 text-sm mt-2">A technology that overlays digital information such as images, sounds, videos, or 3D objects onto the real world.</p>
 </section>
+
+    <div class="flashcards-container">
+  <div class="flashcard" id="card1">
+    <div class="flashcard-front">
+      <h3>Immersive Experience</h3>
+    </div>
+    <div class="flashcard-back">
+      <p>AR allows users to interact with 3D models in their real-world environment, visualizing cats in their homes or outdoor spaces for better-informed adoption decisions.</p>
+    </div>
+  </div>
+  
+  <div class="flashcard" id="card2">
+    <div class="flashcard-front">
+      <h3>Convenience</h3>
+    </div>
+    <div class="flashcard-back">
+      <p>AR is accessible through mobile devices, enabling users to explore and interact with cats anytime, anywhere, without the need for specialized equipment.</p>
+    </div>
+  </div>
+
+  <div class="flashcard" id="card3">
+    <div class="flashcard-front">
+      <h3>Interactive Decision-Making</h3>
+    </div>
+    <div class="flashcard-back">
+      <p>AR empowers users to zoom, rotate, and explore the 3D models from various angles, providing a more detailed understanding of the cats before adoption.</p>
+    </div>
+  </div>
+
+  <div class="flashcard" id="card4">
+    <div class="flashcard-front">
+      <h3>Increased Engagement</h3>
+    </div>
+    <div class="flashcard-back">
+      <p>Incorporating AR sparks curiosity and creates a fun, educational tool to engage users with the adoption process and stray animal management in a creative way.</p>
+    </div>
+  </div>
+</div>
+
     
 <section class="images-container mt-6 flex justify-center gap-4 flex-wrap">
     <div class="img-wrapper">
