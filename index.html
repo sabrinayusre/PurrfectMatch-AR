@@ -65,33 +65,25 @@
     height: auto;
     max-height: 90%; /* Ensures image doesn't overflow */
     object-fit: contain; /* Keeps the image inside without cropping */
-}
-        .images-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-  width: 100%;
-}
-
-.image {
-  width: 300px;  /* Fixed size for the images */
-  height: auto;
-  object-fit: cover;
-  margin: 0 10px;  /* Space between images */
-  border-radius: 10px;
-}
+} 
 
 .flashcards-container {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
+  justify-content: space-evenly;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;  /* Allow the cards to wrap on smaller screens */
 }
 
 .flashcard {
-  width: 200px;
+  width: 22%;  /* Make the flashcards responsive, adjusting based on the screen size */
   height: 300px;
   perspective: 1000px;
+  margin-bottom: 20px;  /* Add space between rows when they wrap */
+  position: relative;
 }
 
 .flashcard .flashcard-front, .flashcard .flashcard-back {
@@ -108,6 +100,7 @@
   box-sizing: border-box;
   border-radius: 10px;
   background-color: #f1f1f1;
+  overflow: hidden;  /* Prevent the text from overflowing the container */
 }
 
 .flashcard .flashcard-front {
@@ -116,6 +109,7 @@
   font-weight: bold;
   transform: rotateY(0deg);
   transition: transform 0.6s;
+  word-wrap: break-word;  /* Ensure long words break and wrap to the next line */
 }
 
 .flashcard .flashcard-back {
@@ -124,6 +118,7 @@
   transform: rotateY(180deg);
   padding: 10px;
   text-align: center;
+  word-wrap: break-word;
 }
 
 .flashcard:hover .flashcard-front {
@@ -133,6 +128,27 @@
 .flashcard:hover .flashcard-back {
   transform: rotateY(360deg);
 }
+
+/* Ensure text doesn't overflow and remains inside the card */
+.flashcard .flashcard-front h3, .flashcard .flashcard-back p {
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis if the text overflows */
+  word-wrap: break-word;
+  white-space: normal; /* Allow text to wrap */
+}
+
+@media (max-width: 768px) {
+  .flashcard {
+    width: 45%;  /* Flashcards will take up less space on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .flashcard {
+    width: 90%;  /* Flashcards will take up most of the screen on very small devices */
+  }
+}
+
 
     </style>
 </head>
