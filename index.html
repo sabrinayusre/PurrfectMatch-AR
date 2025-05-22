@@ -15,9 +15,10 @@
             background-color: #f3f4f6; /* Light gray */
         }
 
-        .hero {
-            background-color: #FFE4A1;
-            padding: 20px;
+        /* Updated header banner with gradient from slightly darker gray to light gray */
+        header.hero {
+            background: linear-gradient(90deg, #d1d5db 0%, #f3f4f6 100%);
+            padding: 20px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -98,19 +99,11 @@
             color: #333;
             line-height: 1.6;
         }
-
-        /* Updated banner with gradient from darker gray to light gray */
-        section.ar-info {
-            padding: 1.5rem; /* same as p-6 */
-            text-align: center;
-            background: linear-gradient(180deg, #d1d5db 0%, #f3f4f6 100%);
-            color: #1f2937; /* Tailwind gray-800 for text */
-        }
     </style>
 </head>
 <body>
 
-<header class="hero flex items-center justify-between px-8">
+<header class="hero">
     <div>
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/Purrfect.png" 
              alt="Purrfect Match Logo" class="h-[36px]" />
@@ -122,7 +115,7 @@
     <img src="Assets/cat image.JPG" alt="Banner Image" />
 </div>
 
-<section class="ar-info mt-6">
+<section class="ar-info mt-6 px-6 text-center">
     <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
     <p class="text-gray-800 text-sm mt-2">A technology that overlays digital information such as images, sounds, videos, or 3D objects onto the real world.</p>
 </section>
