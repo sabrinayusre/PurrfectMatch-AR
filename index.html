@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Load Model Viewer -->
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <script
+        type="module"
+        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
+    ></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet"
+    />
 
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f3f4f6; /* Light gray */
+            background-color: #F6F6F6; /* Updated to Petfinder gray */
         }
 
         .hero {
@@ -101,148 +107,189 @@
     </style>
 </head>
 <body>
+    <header class="hero flex items-center justify-between px-8">
+        <div>
+            <img
+                src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/Purrfect.png"
+                alt="Purrfect Match Logo"
+                class="h-[36px]"
+            />
+        </div>
+        <a href="http://localhost/purrfect_match/cat.php" class="btn btn-yellow shadow-md"
+            >Adopt Now</a
+        >
+    </header>
 
-<header class="hero flex items-center justify-between px-8">
-    <div>
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/Purrfect.png" 
-             alt="Purrfect Match Logo" class="h-[36px]">
+    <div class="banner">
+        <img src="Assets/cat image.JPG" alt="Banner Image" />
     </div>
-    <a href="http://localhost/purrfect_match/cat.php" class="btn btn-yellow shadow-md">Adopt Now</a>
-</header>
 
-<div class="banner">
-    <img src="Assets/cat image.JPG" alt="Banner Image">
-</div>
+    <section class="bg-orange-300 p-6 text-center">
+        <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
+        <p class="text-gray-800 text-sm mt-2">
+            A technology that overlays digital information such as images, sounds,
+            videos, or 3D objects onto the real world.
+        </p>
+    </section>
 
-<section class="bg-orange-300 p-6 text-center">
-    <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
-    <p class="text-gray-800 text-sm mt-2">A technology that overlays digital information such as images, sounds, videos, or 3D objects onto the real world.</p>
-</section>
+    <section
+        class="images-container mt-6 flex justify-center gap-4 flex-wrap"
+    >
+        <div class="img-wrapper">
+            <img
+                src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png"
+                alt="Image 1"
+                class="image"
+            />
+        </div>
+        <div class="img-wrapper">
+            <img
+                src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png"
+                alt="Image 2"
+                class="image"
+            />
+        </div>
+        <div class="img-wrapper">
+            <img
+                src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png"
+                alt="Image 3"
+                class="image"
+            />
+        </div>
+    </section>
 
-<section class="images-container mt-6 flex justify-center gap-4 flex-wrap">
-    <div class="img-wrapper">
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png" 
-             alt="Image 1" class="image">
+    <section>
+        <div
+            class="bg-yellow-200 text-gray-700 text-center text-sm font-medium mt-4 max-w-lg mx-auto p-3 rounded-md shadow-md"
+        >
+            *Please note that the 3D models may appear different from the preview
+            images, as certain visual elements, such as hair particles, are not
+            supported in the current file format.
+        </div>
+    </section>
+
+    <div class="text-center my-10">
+        <button onclick="startAR()" class="btn btn-orange shadow-md"><b>Start AR</b></button>
     </div>
-    <div class="img-wrapper">
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png" 
-             alt="Image 2" class="image">
+
+    <div class="mb-6 text-center">
+        <label for="model-selector" class="text-lg font-medium"
+            >Choose a 3D Cat Model:</label
+        >
+        <select id="model-selector" class="p-2 bg-yellow-100 rounded-md mt-2">
+            <option value="Assets/Purrfect Match Tuxedo.glb">Tuxedo Cat</option>
+            <option value="Assets/Purrfect Match Siamese.glb">Siamese Cat</option>
+            <option value="Assets/Purrfect Match Calico.glb">Calico Cat</option>
+        </select>
     </div>
-    <div class="img-wrapper">
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png" 
-             alt="Image 3" class="image">
+
+    <div class="flex justify-center my-10">
+        <model-viewer
+            id="model-viewer"
+            src="Assets/Purrfect Match Tuxedo.glb"
+            ios-src="Assets/Purrfect Match Tuxedo.usdz"
+            alt="A 3D model of a cat"
+            poster="Assets/tabby 1.png"
+            shadow-intensity="1"
+            camera-controls
+            auto-rotate
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            ar-scale="auto"
+            style="width: 100%; max-width: 500px; height: 500px;"
+        ></model-viewer>
     </div>
-</section>
 
-<section>
-    <div class="bg-yellow-200 text-gray-700 text-center text-sm font-medium mt-4 max-w-lg mx-auto p-3 rounded-md shadow-md">
-        *Please note that the 3D models may appear different from the preview images, as certain visual elements, such as hair particles, are not supported in the current file format.
+    <script>
+        document
+            .getElementById("model-selector")
+            .addEventListener("change", function () {
+                const selectedModel = this.value;
+                const modelViewer = document.getElementById("model-viewer");
+
+                const models = {
+                    "Assets/Purrfect Match Tuxedo.glb": {
+                        glb: "Assets/Purrfect Match Tuxedo.glb",
+                        usdz: "Assets/Purrfect Match Tuxedo.usdz",
+                    },
+                    "Assets/Purrfect Match Siamese.glb": {
+                        glb: "Assets/Purrfect Match Siamese.glb",
+                        usdz: "Assets/Purrfect Match Siamese.usdz",
+                    },
+                    "Assets/Purrfect Match Calico.glb": {
+                        glb: "Assets/Purrfect Match Calico.glb",
+                        usdz: "Assets/Purrfect Match Calico.usdz",
+                    },
+                };
+
+                modelViewer.setAttribute("src", models[selectedModel].glb);
+                modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
+            });
+
+        function startAR() {
+            const modelViewer = document.getElementById("model-viewer");
+            if (modelViewer.hasAttribute("ar")) {
+                modelViewer.activateAR();
+            } else {
+                const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+                    ? modelViewer.getAttribute("ios-src")
+                    : modelViewer.getAttribute("src");
+                window.open(arUrl, "_blank");
+            }
+        }
+    </script>
+
+    <div
+        class="bg-yellow-400 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md"
+    >
+        <div class="ar-instructions"></div>
+        <h2 class="text-lg font-bold flex items-center justify-center">
+            <img
+                src="Assets/help-252.png"
+                alt="Help Icon"
+                class="h-6 w-auto ml-2"
+            />
+            How to Use AR
+        </h2>
+        <p class="mt-2 text-sm text-white">
+            1. Click the "Start AR" button to begin. <br />
+            2. Allow camera access when prompted. <br />
+            3. Point your camera at a flat surface to place the 3D cat. <br />
+            4. Use touch gestures to zoom, rotate, or move the model. <br />
+            Note: It is recommended to experience AR using your mobile phones.
+        </p>
+        <a
+            href="http://localhost/purrfect_match/index.php"
+            class="btn btn-orange mt-4 inline-block"
+            >Visit Adoption Homepage</a
+        >
     </div>
-</section>
 
-<div class="text-center my-10">
-    <button onclick="startAR()" class="btn btn-orange shadow-md"><b>Start AR</b></button>
-</div>
+    <!-- Back to Top Button -->
+    <button
+        onclick="scrollToTop()"
+        id="backToTopBtn"
+        class="fixed bottom-6 right-6 bg-[#FFB74D] text-black font-bold py-2 px-4 rounded-full shadow-md hidden"
+    >
+        ↑ Top
+    </button>
 
-<div class="mb-6 text-center">
-    <label for="model-selector" class="text-lg font-medium">Choose a 3D Cat Model:</label>
-    <select id="model-selector" class="p-2 bg-yellow-100 rounded-md mt-2">
-        <option value="Assets/Purrfect Match Tuxedo.glb">Tuxedo Cat</option>
-        <option value="Assets/Purrfect Match Siamese.glb">Siamese Cat</option>
-        <option value="Assets/Purrfect Match Calico.glb">Calico Cat</option>
-    </select>
-</div>
-
-<div class="flex justify-center my-10">
-    <model-viewer 
-        id="model-viewer"
-        src="Assets/Purrfect Match Tuxedo.glb"
-        ios-src="Assets/Purrfect Match Tuxedo.usdz"
-        alt="A 3D model of a cat"
-        poster="Assets/tabby 1.png"
-        shadow-intensity="1"
-        camera-controls
-        auto-rotate
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        ar-scale="auto"
-        style="width: 100%; max-width: 500px; height: 500px;">
-    </model-viewer>
-</div>
-
-<script>
-    document.getElementById("model-selector").addEventListener("change", function () {
-        const selectedModel = this.value;
-        const modelViewer = document.getElementById("model-viewer");
-
-        const models = {
-            "Assets/Purrfect Match Tuxedo.glb": {
-                glb: "Assets/Purrfect Match Tuxedo.glb",
-                usdz: "Assets/Purrfect Match Tuxedo.usdz"
-            },
-            "Assets/Purrfect Match Siamese.glb": {
-                glb: "Assets/Purrfect Match Siamese.glb",
-                usdz: "Assets/Purrfect Match Siamese.usdz"
-            },
-            "Assets/Purrfect Match Calico.glb": {
-                glb: "Assets/Purrfect Match Calico.glb",
-                usdz: "Assets/Purrfect Match Calico.usdz"
+    <script>
+        window.onscroll = function () {
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            if (
+                document.body.scrollTop > 300 ||
+                document.documentElement.scrollTop > 300
+            ) {
+                backToTopBtn.classList.remove("hidden");
+            } else {
+                backToTopBtn.classList.add("hidden");
             }
         };
 
-        modelViewer.setAttribute("src", models[selectedModel].glb);
-        modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
-    });
-
-    function startAR() {
-        const modelViewer = document.getElementById("model-viewer");
-        if (modelViewer.hasAttribute("ar")) {
-            modelViewer.activateAR();
-        } else {
-            const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-                ? modelViewer.getAttribute("ios-src")
-                : modelViewer.getAttribute("src");
-            window.open(arUrl, "_blank");
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
-    }
-</script>
-
-<div class="bg-yellow-400 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
-    <div class="ar-instructions"></div>
-    <h2 class="text-lg font-bold flex items-center justify-center">
-        <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2"> 
-        How to Use AR
-    </h2>
-    <p class="mt-2 text-sm text-white">
-        1. Click the "Start AR" button to begin. <br>
-        2. Allow camera access when prompted. <br>
-        3. Point your camera at a flat surface to place the 3D cat. <br>
-        4. Use touch gestures to zoom, rotate, or move the model. <br>
-        Note: It is recommended to experience AR using your mobile phones.
-    </p>
-    <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
-</div>
-
-<!-- Back to Top Button -->
-<button onclick="scrollToTop()" id="backToTopBtn" 
-    class="fixed bottom-6 right-6 bg-[#FFB74D] text-black font-bold py-2 px-4 rounded-full shadow-md hidden">
-    ↑ Top
-</button>
-
-<script>
-    window.onscroll = function () {
-        const backToTopBtn = document.getElementById("backToTopBtn");
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            backToTopBtn.classList.remove("hidden");
-        } else {
-            backToTopBtn.classList.add("hidden");
-        }
-    };
-
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-</script>
-
+    </script>
 </body>
 </html>
