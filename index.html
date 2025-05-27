@@ -98,6 +98,24 @@
             color: #333;
             line-height: 1.6;
         }
+
+        .quiz-btn {
+    background-color: #FEF3C7; /* Tailwind's yellow-100 */
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    text-align: left;
+}
+.quiz-btn:hover {
+    background-color: #FDE68A; /* Tailwind's yellow-200 */
+}
+.quiz-btn.selected {
+    background-color: #FDBA74; /* Tailwind's orange-300 */
+    font-weight: 700;
+}
+
+        
     </style>
 </head>
     
@@ -298,10 +316,13 @@
             const q = btn.dataset.q;
             const val = btn.dataset.value;
 
-            // Deselect other buttons in the same group
-            document.querySelectorAll(`.quiz-btn[data-q="${q}"]`).forEach(b => b.classList.remove("selected"));
-            btn.classList.add("selected");
+            // Deselect other buttons in the same question group
+            document.querySelectorAll(`.quiz-btn[data-q="${q}"]`).forEach(b => {
+                b.classList.remove("selected");
+            });
 
+            // Select current button and record answer
+            btn.classList.add("selected");
             answers[q] = val;
         });
     });
@@ -310,35 +331,61 @@
         e.preventDefault();
 
         if (!answers.q1 || !answers.q2) {
-            alert("Please answer all questions!");
+            alert("Please answer all questions.");
             return;
         }
 
-        const scores = { tuxedo: 0, siamese: 0, calico: 0 };
-
-        if (answers.q1 === "playful") scores.siamese++;
-        if (answers.q1 === "relaxed") scores.tuxedo++;
-        if (answers.q1 === "social") scores.calico++;
-
-        if (answers.q2 === "playful") scores.siamese++;
-        if (answers.q2 === "relaxed") scores.tuxedo++;
-        if (answers.q2 === "social") scores.calico++;
-
-        const result = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-
-        const breedMap = {
-            tuxedo: { name: "Tuxedo", link: "#tuxedo-cat" },
-            siamese: { name: "Siamese", link: "#siamese-cat" },
-            calico: { name: "Calico", link: "#calico-cat" }
+        // Determine result (simple logic example)
+        const resultMap = {
+            playful: "Tabby",
+            relaxed: "Siamese",
+            social: "Calico"
         };
 
-        const breed = breedMap[result];
-        document.getElementById("breedName").textContent = breed.name;
-        document.getElementById("viewCatLink").href = breed.link;
+        // Count most selected category
+        const counts = {};
+        Object.values(answers).forEach(val => {
+            counts[val] = (counts[val] || 0) + 1;
+        });
+
+        const mostSelected = Object.keys(counts).reduce((a, b) =>
+            counts[a] > counts[b] ? a : b
+        );
+
+        const breedName = resultMap[mostSelected];
+        const breedPageMap = {
+            Tabby: "tabby-cat.php",
+            Siamese: "siamese-cat.php",
+            Calico: "calico-cat.php"
+        };
+
+        document.getElementById("breedName").textContent = breedName;
+        document.getElementById("viewCatLink").href = breedPageMap[breedName];
         document.getElementById("quizResult").classList.remove("hidden");
+        window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
     });
 </script>
-<!-- END: What Cat Breed Are You Quiz -->
+
+    <style>
+    .quiz-btn {
+        background-color: #FEF3C7; /* Tailwind yellow-100 */
+        padding: 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        font-weight: 500;
+        text-align: left;
+    }
+
+    .quiz-btn:hover {
+        background-color: #FDE68A; /* Tailwind yellow-200 */
+    }
+
+    .quiz-btn.selected {
+        background-color: #FDBA74; /* Tailwind orange-300 */
+        font-weight: 700;
+    }
+</style>
+
     
 </body>
 </html>
