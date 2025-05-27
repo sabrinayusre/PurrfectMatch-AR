@@ -251,8 +251,45 @@
         @apply bg-orange-300 font-semibold;
     }
 </style>
+   
+<div class="bg-yellow-400 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
+    <div class="ar-instructions"></div>
+    <h2 class="text-lg font-bold flex items-center justify-center">
+        <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2" />
+        How to Use AR
+    </h2>
+    <p class="mt-2 text-sm text-white">
+        1. Click the "Start AR" button to begin. <br />
+        2. Allow camera access when prompted. <br />
+        3. Point your camera at a flat surface to place the 3D cat. <br />
+        4. Use touch gestures to zoom, rotate, or move the model. <br />
+        Note: It is recommended to experience AR using your mobile phones.
+    </p>
+    <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
+</div>
+
+<!-- Back to Top Button -->
+<button onclick="scrollToTop()" id="backToTopBtn" 
+    class="fixed bottom-6 right-6 bg-[#FFB74D] text-black font-bold py-2 px-4 rounded-full shadow-md hidden">
+    ↑ Top
+</button>
 
 <script>
+    window.onscroll = function () {
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            backToTopBtn.classList.remove("hidden");
+        } else {
+            backToTopBtn.classList.add("hidden");
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+</script>
+
+    <script>
     const answers = { q1: null, q2: null };
     const buttons = document.querySelectorAll(".quiz-btn");
 
@@ -302,43 +339,6 @@
     });
 </script>
 <!-- END: What Cat Breed Are You Quiz -->
-   
-<div class="bg-yellow-400 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
-    <div class="ar-instructions"></div>
-    <h2 class="text-lg font-bold flex items-center justify-center">
-        <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2" />
-        How to Use AR
-    </h2>
-    <p class="mt-2 text-sm text-white">
-        1. Click the "Start AR" button to begin. <br />
-        2. Allow camera access when prompted. <br />
-        3. Point your camera at a flat surface to place the 3D cat. <br />
-        4. Use touch gestures to zoom, rotate, or move the model. <br />
-        Note: It is recommended to experience AR using your mobile phones.
-    </p>
-    <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
-</div>
-
-<!-- Back to Top Button -->
-<button onclick="scrollToTop()" id="backToTopBtn" 
-    class="fixed bottom-6 right-6 bg-[#FFB74D] text-black font-bold py-2 px-4 rounded-full shadow-md hidden">
-    ↑ Top
-</button>
-
-<script>
-    window.onscroll = function () {
-        const backToTopBtn = document.getElementById("backToTopBtn");
-        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-            backToTopBtn.classList.remove("hidden");
-        } else {
-            backToTopBtn.classList.add("hidden");
-        }
-    };
-
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-</script>
-
+    
 </body>
 </html>
