@@ -100,34 +100,6 @@
         }
     </style>
 </head>
-
-    <section id="cat-quiz" class="bg-white text-black p-6 mt-10 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto">
-    <h2 class="text-xl font-bold mb-4 text-center">🐾 What Cat Breed Are You?</h2>
-    <form id="quizForm" class="space-y-4">
-        <div>
-            <label class="block font-medium">1. What’s your ideal weekend?</label>
-            <select name="q1" class="w-full p-2 bg-yellow-100 rounded-md">
-                <option value="playful">Exploring outdoors or playing sports</option>
-                <option value="relaxed">Relaxing at home with a book or Netflix</option>
-                <option value="social">Going out with friends or trying new cafes</option>
-            </select>
-        </div>
-
-        <div>
-            <label class="block font-medium">2. Pick a personality trait:</label>
-            <select name="q2" class="w-full p-2 bg-yellow-100 rounded-md">
-                <option value="playful">Adventurous</option>
-                <option value="relaxed">Gentle</option>
-                <option value="social">Charming</option>
-            </select>
-        </div>
-
-        <div class="text-center">
-            <button type="submit" class="btn btn-orange mt-4">Find Out!</button>
-        </div>
-    </form>
-</section>
-
     
 <body>
 
@@ -235,40 +207,102 @@
         }
     }
 </script>
+ <!-- BEGIN: What Cat Breed Are You Quiz -->
+<section id="cat-quiz" class="bg-white text-black p-6 mt-10 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto">
+    <h2 class="text-2xl font-bold mb-4 text-center">🐾 What Cat Breed Are You?</h2>
+    <form id="quizForm" class="space-y-6">
+
+        <!-- Question 1 -->
+        <div>
+            <p class="font-medium mb-2">1. What’s your ideal weekend?</p>
+            <div class="flex flex-col gap-2">
+                <button type="button" class="quiz-btn" data-q="q1" data-value="playful">Exploring outdoors or playing sports</button>
+                <button type="button" class="quiz-btn" data-q="q1" data-value="relaxed">Relaxing at home with a book or Netflix</button>
+                <button type="button" class="quiz-btn" data-q="q1" data-value="social">Going out with friends or trying new cafes</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div>
+            <p class="font-medium mb-2">2. Pick a personality trait:</p>
+            <div class="flex flex-col gap-2">
+                <button type="button" class="quiz-btn" data-q="q2" data-value="playful">Adventurous</button>
+                <button type="button" class="quiz-btn" data-q="q2" data-value="relaxed">Gentle</button>
+                <button type="button" class="quiz-btn" data-q="q2" data-value="social">Charming</button>
+            </div>
+        </div>
+
+        <div class="text-center mt-6">
+            <button type="submit" class="btn btn-orange">Find Out!</button>
+        </div>
+    </form>
+
+    <div id="quizResult" class="mt-6 text-center hidden">
+        <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
+        <a id="viewCatLink" href="#" class="text-blue-600 underline mt-2 inline-block">View your cat!</a>
+    </div>
+</section>
+
+<style>
+    .quiz-btn {
+        @apply bg-yellow-100 p-3 rounded-md hover:bg-yellow-200 transition;
+    }
+    .quiz-btn.selected {
+        @apply bg-orange-300 font-semibold;
+    }
+</style>
 
 <script>
+    const answers = { q1: null, q2: null };
+    const buttons = document.querySelectorAll(".quiz-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const q = btn.dataset.q;
+            const val = btn.dataset.value;
+
+            // Deselect other buttons in the same group
+            document.querySelectorAll(`.quiz-btn[data-q="${q}"]`).forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+
+            answers[q] = val;
+        });
+    });
+
     document.getElementById("quizForm").addEventListener("submit", function (e) {
         e.preventDefault();
-        const form = e.target;
-        const q1 = form.q1.value;
-        const q2 = form.q2.value;
 
-        // Simple scoring logic
+        if (!answers.q1 || !answers.q2) {
+            alert("Please answer all questions!");
+            return;
+        }
+
         const scores = { tuxedo: 0, siamese: 0, calico: 0 };
 
-        if (q1 === "playful") scores.siamese++;
-        if (q1 === "relaxed") scores.tuxedo++;
-        if (q1 === "social") scores.calico++;
+        if (answers.q1 === "playful") scores.siamese++;
+        if (answers.q1 === "relaxed") scores.tuxedo++;
+        if (answers.q1 === "social") scores.calico++;
 
-        if (q2 === "playful") scores.siamese++;
-        if (q2 === "relaxed") scores.tuxedo++;
-        if (q2 === "social") scores.calico++;
+        if (answers.q2 === "playful") scores.siamese++;
+        if (answers.q2 === "relaxed") scores.tuxedo++;
+        if (answers.q2 === "social") scores.calico++;
 
-        // Get highest score
         const result = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
 
-        // Redirect (update these URLs to match your sister's system)
-        const redirectMap = {
-            tuxedo: "http://example.com/tuxedo-cat",
-            siamese: "http://example.com/siamese-cat",
-            calico: "http://example.com/calico-cat"
+        const breedMap = {
+            tuxedo: { name: "Tuxedo", link: "#tuxedo-cat" },
+            siamese: { name: "Siamese", link: "#siamese-cat" },
+            calico: { name: "Calico", link: "#calico-cat" }
         };
 
-        window.location.href = redirectMap[result];
+        const breed = breedMap[result];
+        document.getElementById("breedName").textContent = breed.name;
+        document.getElementById("viewCatLink").href = breed.link;
+        document.getElementById("quizResult").classList.remove("hidden");
     });
 </script>
-
-    
+<!-- END: What Cat Breed Are You Quiz -->
+   
 <div class="bg-yellow-400 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
     <div class="ar-instructions"></div>
     <h2 class="text-lg font-bold flex items-center justify-center">
