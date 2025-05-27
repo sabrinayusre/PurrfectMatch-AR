@@ -158,6 +158,41 @@
         *Please note that the 3D models may appear different from the preview images, as certain visual elements, such as hair particles, are not supported in the current file format.
     </div>
 </section>
+ <!-- BEGIN: What Cat Breed Are You Quiz -->
+<section id="cat-quiz" class="bg-white text-black p-6 mt-10 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto">
+    <h2 class="text-2xl font-bold mb-4 text-center">🐾 What Cat Breed Are You?</h2>
+    <form id="quizForm" class="space-y-6">
+
+        <!-- Question 1 -->
+        <div>
+            <p class="font-medium mb-2">1. What’s your ideal weekend?</p>
+            <div class="flex flex-col gap-2">
+                <button type="button" class="quiz-btn" data-q="q1" data-value="playful">Exploring outdoors or playing sports</button>
+                <button type="button" class="quiz-btn" data-q="q1" data-value="relaxed">Relaxing at home with a book or Netflix</button>
+                <button type="button" class="quiz-btn" data-q="q1" data-value="social">Going out with friends or trying new cafes</button>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div>
+            <p class="font-medium mb-2">2. Pick a personality trait:</p>
+            <div class="flex flex-col gap-2">
+                <button type="button" class="quiz-btn" data-q="q2" data-value="playful">Adventurous</button>
+                <button type="button" class="quiz-btn" data-q="q2" data-value="relaxed">Gentle</button>
+                <button type="button" class="quiz-btn" data-q="q2" data-value="social">Charming</button>
+            </div>
+        </div>
+
+        <div class="text-center mt-6">
+            <button type="submit" class="btn btn-orange">Find Out!</button>
+        </div>
+    </form>
+
+    <div id="quizResult" class="mt-6 text-center hidden">
+        <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
+        <a id="viewCatLink" href="#" class="text-blue-600 underline mt-2 inline-block">View your cat!</a>
+    </div>
+</section>
 
 <div class="text-center my-10">
     <button onclick="startAR()" class="btn btn-orange shadow-md"><b>Start AR</b></button>
@@ -225,41 +260,6 @@
         }
     }
 </script>
- <!-- BEGIN: What Cat Breed Are You Quiz -->
-<section id="cat-quiz" class="bg-white text-black p-6 mt-10 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto">
-    <h2 class="text-2xl font-bold mb-4 text-center">🐾 What Cat Breed Are You?</h2>
-    <form id="quizForm" class="space-y-6">
-
-        <!-- Question 1 -->
-        <div>
-            <p class="font-medium mb-2">1. What’s your ideal weekend?</p>
-            <div class="flex flex-col gap-2">
-                <button type="button" class="quiz-btn" data-q="q1" data-value="playful">Exploring outdoors or playing sports</button>
-                <button type="button" class="quiz-btn" data-q="q1" data-value="relaxed">Relaxing at home with a book or Netflix</button>
-                <button type="button" class="quiz-btn" data-q="q1" data-value="social">Going out with friends or trying new cafes</button>
-            </div>
-        </div>
-
-        <!-- Question 2 -->
-        <div>
-            <p class="font-medium mb-2">2. Pick a personality trait:</p>
-            <div class="flex flex-col gap-2">
-                <button type="button" class="quiz-btn" data-q="q2" data-value="playful">Adventurous</button>
-                <button type="button" class="quiz-btn" data-q="q2" data-value="relaxed">Gentle</button>
-                <button type="button" class="quiz-btn" data-q="q2" data-value="social">Charming</button>
-            </div>
-        </div>
-
-        <div class="text-center mt-6">
-            <button type="submit" class="btn btn-orange">Find Out!</button>
-        </div>
-    </form>
-
-    <div id="quizResult" class="mt-6 text-center hidden">
-        <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
-        <a id="viewCatLink" href="#" class="text-blue-600 underline mt-2 inline-block">View your cat!</a>
-    </div>
-</section>
 
 <style>
     .quiz-btn {
