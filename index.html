@@ -223,90 +223,124 @@ nav.menu a:hover {
 
 <script>
   const quizData = [
-    { q: "What’s your ideal weekend?", a: ["Exploring outdoors", "Relaxing at home", "Café hopping"] },
-    { q: "Pick a personality trait:", a: ["Adventurous", "Gentle", "Charming"] },
-    { q: "What's your energy level like?", a: ["High and active", "Balanced", "Calm and lazy"] },
-    { q: "Choose a hobby:", a: ["Hiking or sports", "Reading or gaming", "Socializing"] },
-    { q: "Your favorite time of day?", a: ["Morning", "Evening", "Night"] },
-    { q: "How do you react to new people?", a: ["Curious and bold", "Shy but friendly", "Cautious"] },
-    { q: "Pick a cozy spot:", a: ["Sunny windowsill", "Comfy bed", "By the fireplace"] },
-    { q: "What role do you play in a group?", a: ["Leader", "Supporter", "Entertainer"] }
-  ];
+  { q: "What’s your ideal weekend?", a: ["Exploring outdoors", "Relaxing at home", "Café hopping"] },
+  { q: "Pick a personality trait:", a: ["Adventurous", "Gentle", "Charming"] },
+  { q: "What's your energy level like?", a: ["High and active", "Balanced", "Calm and lazy"] },
+  { q: "Choose a hobby:", a: ["Hiking or sports", "Reading or gaming", "Socializing"] },
+  { q: "Your favorite time of day?", a: ["Morning", "Evening", "Night"] },
+  { q: "How do you react to new people?", a: ["Curious and bold", "Shy but friendly", "Cautious"] },
+  { q: "Pick a cozy spot:", a: ["Sunny windowsill", "Comfy bed", "By the fireplace"] },
+  { q: "What role do you play in a group?", a: ["Leader", "Supporter", "Entertainer"] }
+];
 
-  let currentQuestion = 0;
-  const answers = [];
+let currentQuestion = 0;
+const answers = new Array(quizData.length).fill(null);
 
-  function startQuiz() {
-    document.getElementById("quizStart").classList.add("hidden");
-    document.getElementById("quizForm").classList.remove("hidden");
-    showQuestion();
-  }
+function startQuiz() {
+  document.getElementById("quizStart").classList.add("hidden");
+  document.getElementById("quizForm").classList.remove("hidden");
+  showQuestion();
+}
 
-  function showQuestion() {
-    const qData = quizData[currentQuestion];
-    const questionEl = document.getElementById("questionText");
-    const answersEl = document.getElementById("answerButtons");
-    const nextBtn = document.getElementById("nextBtn");
-    const resultBtn = document.getElementById("resultBtn");
+function showQuestion() {
+  const qData = quizData[currentQuestion];
+  const questionEl = document.getElementById("questionText");
+  const answersEl = document.getElementById("answerButtons");
+  const nextBtn = document.getElementById("nextBtn");
+  const resultBtn = document.getElementById("resultBtn");
 
-    questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
-    answersEl.innerHTML = "";
-    qData.a.forEach(option => {
-      const btn = document.createElement("button");
-      btn.className = "quiz-btn";
-      btn.textContent = option;
-      btn.onclick = () => {
-        answers[currentQuestion] = option;
-        document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
+  questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
+  answersEl.innerHTML = "";
 
-        if (currentQuestion === quizData.length - 1) {
-          resultBtn.classList.remove("hidden");
-          nextBtn.classList.add("hidden");
-        } else {
-          nextBtn.classList.remove("hidden");
-          resultBtn.classList.add("hidden");
-        }
-      };
-      answersEl.appendChild(btn);
-    });
+  // Disable next/result buttons until user selects an answer
+  nextBtn.disabled = true;
+  resultBtn.disabled = true;
 
+  qData.a.forEach(option => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "quiz-btn";
+    btn.textContent = option;
+
+    // Highlight if previously selected
+    if (answers[currentQuestion] === option) {
+      btn.classList.add("selected");
+      nextBtn.disabled = false;
+      if (currentQuestion === quizData.length -1) resultBtn.disabled = false;
+    }
+
+    btn.onclick = () => {
+      answers[currentQuestion] = option;
+
+      // Remove selection on all buttons
+      document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+
+      // Select clicked button
+      btn.classList.add("selected");
+
+      // Enable Next or Result button
+      if (currentQuestion === quizData.length - 1) {
+        nextBtn.classList.add("hidden");
+        resultBtn.classList.remove("hidden");
+        resultBtn.disabled = false;
+      } else {
+        nextBtn.classList.remove("hidden");
+        resultBtn.classList.add("hidden");
+        nextBtn.disabled = false;
+      }
+    };
+
+    answersEl.appendChild(btn);
+  });
+
+  // Show/Hide buttons appropriately
+  if (currentQuestion === quizData.length - 1) {
     nextBtn.classList.add("hidden");
+    resultBtn.classList.remove("hidden");
+    resultBtn.disabled = answers[currentQuestion] ? false : true;
+  } else {
+    nextBtn.classList.remove("hidden");
+    nextBtn.disabled = answers[currentQuestion] ? false : true;
     resultBtn.classList.add("hidden");
   }
+}
 
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    if (answers[currentQuestion]) {
-      currentQuestion++;
-      showQuestion();
-    } else {
-      alert("Please select an answer.");
-    }
+document.getElementById("nextBtn").addEventListener("click", () => {
+  if (!answers[currentQuestion]) {
+    alert("Please select an answer.");
+    return;
+  }
+  currentQuestion++;
+  showQuestion();
+});
+
+document.getElementById("quizForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (answers.includes(null)) {
+    alert("Please complete all questions.");
+    return;
+  }
+
+  // Scoring logic - example from your code
+  const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
+
+  answers.forEach(ans => {
+    if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
+    if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
+    if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
   });
 
-  document.getElementById("quizForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+  const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
 
-    if (answers.length < quizData.length) {
-      alert("Please complete all questions.");
-      return;
-    }
+  // Show result section
+  document.getElementById("breedName").textContent = breed;
+  document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
+  document.getElementById("quizResult").classList.remove("hidden");
 
-    const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
-    answers.forEach(ans => {
-      if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
-      if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
-      if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
-    });
-
-    const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
-
-    document.getElementById("quizResult").classList.remove("hidden");
-    document.getElementById("breedName").textContent = breed;
-    document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
-    window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
-  });
-</script>
+  // Scroll to result
+  window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
+});
 
 
     <hr class="short-line" />
