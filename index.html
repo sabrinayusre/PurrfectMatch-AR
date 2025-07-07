@@ -124,50 +124,45 @@
   opacity: 0.6;
 }
 
-nav.menu {
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  padding: 8px 16px;
-  display: flex;
-  gap: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 10;
+ /* Nav Menu Styling */
+.main-nav {
+  position: relative;
+  z-index: 50;
 }
 
-nav.menu a {
+.nav-link {
+  color: #FF9800;
   font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 12px;
-  color: #333;
-  transition: background-color 0.3s;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
-nav.menu a:hover {
-  background-color: #FFECB3; /* pastel yellow hover */
+.nav-link:hover {
+  background-color: #FFF3CD; /* soft pastel yellow */
 }
-
-        
+       
     </style>
 </head>
     
 <body>
+<!-- Top Navigation Menu -->
+<nav class="main-nav flex justify-between items-center px-8 py-3 bg-white shadow-md">
+  <div class="text-lg font-bold text-orange-500">Purrfect Match AR</div>
+  <div class="space-x-6">
+    <a href="#info" class="nav-link">Info</a>
+    <a href="#cat-quiz" class="nav-link">Quiz</a>
+    <a href="#model-viewer" class="nav-link">AR Feature</a>
+  </div>
+</nav>
 
-<header class="hero flex items-center justify-between px-8">
+<header class="hero flex items-center justify-between px-8 mt-2">
     <div>
         <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/Purrfect.png" 
              alt="Purrfect Match Logo" class="h-[36px]" />
     </div>
     <a href="http://localhost/purrfect_match/cat.php" class="btn btn-yellow shadow-md">Adopt Now</a>
-
-    <nav class="menu">
-  <a href="#info">Info</a>
-  <a href="#cat-quiz">Quiz</a>
-  <a href="#model-viewer">AR Feature</a>
-</nav>
     
 </header>
 
