@@ -285,27 +285,23 @@ nav.menu a:hover {
   });
 
   document.getElementById("quizForm").addEventListener("submit", function (e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (answers.length < quizData.length) {
-      alert("Please complete all questions.");
-      return;
-    }
-
-    const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
-    answers.forEach(ans => {
-      if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
-      if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
-      if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
-    });
-
-    const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
-
-    document.getElementById("quizResult").classList.remove("hidden");
-    document.getElementById("breedName").textContent = breed;
-    document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
-    window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
+  const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
+  answers.forEach(ans => {
+    if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
+    if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
+    if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
   });
+
+  const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
+
+  document.getElementById("quizResult").classList.remove("hidden");
+  document.getElementById("breedName").textContent = breed;
+  document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
+  window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
+});
+
 </script>
 
 
