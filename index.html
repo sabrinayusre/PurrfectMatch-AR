@@ -259,18 +259,20 @@ nav.menu a:hover {
         answers[currentQuestion] = option;
         document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
         btn.classList.add("selected");
-        nextBtn.classList.remove("hidden");
+
+        if (currentQuestion === quizData.length - 1) {
+          resultBtn.classList.remove("hidden");
+          nextBtn.classList.add("hidden");
+        } else {
+          nextBtn.classList.remove("hidden");
+          resultBtn.classList.add("hidden");
+        }
       };
       answersEl.appendChild(btn);
     });
 
     nextBtn.classList.add("hidden");
     resultBtn.classList.add("hidden");
-
-    if (currentQuestion === quizData.length - 1) {
-      nextBtn.classList.add("hidden");
-      resultBtn.classList.remove("hidden");
-    }
   }
 
   document.getElementById("nextBtn").addEventListener("click", () => {
@@ -285,7 +287,11 @@ nav.menu a:hover {
   document.getElementById("quizForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Simple scoring logic
+    if (answers.length < quizData.length) {
+      alert("Please complete all questions.");
+      return;
+    }
+
     const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
     answers.forEach(ans => {
       if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
