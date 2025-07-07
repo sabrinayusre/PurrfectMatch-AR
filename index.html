@@ -123,6 +123,31 @@
   opacity: 0.6;
 }
 
+nav.menu {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 8px 16px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+nav.menu a {
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 12px;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+nav.menu a:hover {
+  background-color: #FFECB3; /* pastel yellow hover */
+}
 
         
     </style>
@@ -136,13 +161,20 @@
              alt="Purrfect Match Logo" class="h-[36px]" />
     </div>
     <a href="http://localhost/purrfect_match/cat.php" class="btn btn-yellow shadow-md">Adopt Now</a>
+
+    <nav class="menu">
+  <a href="#info">Info</a>
+  <a href="#cat-quiz">Quiz</a>
+  <a href="#model-viewer">AR Feature</a>
+</nav>
+
 </header>
 
 <div class="banner">
     <img src="Assets/Purrfect Match AR Banner.png" alt="Banner Image" />
 </div>
 
-<section class="bg-orange-300 p-6 text-center">
+<section id="info" class="bg-orange-300 p-6 text-center">
     <h2 class="font-bold text-lg">What is Augmented Reality?</h2>
     <p class="text-gray-800 text-sm mt-2">Augmented Reality (AR) is a technology that blends digital elements—like 3D models, animations, and sounds—into the real world through your device’s camera. Unlike Virtual Reality (VR), which creates a completely virtual space, AR enhances the physical world around you.</p>
     <p class="text-gray-800 text-sm mt-2"> AR lets you view 3D cats through your phone's camera as if they were actually in your environment. This gives potential adopters a more personal and interactive wy to see what a pet might look like in their home.</p>
