@@ -203,24 +203,23 @@ nav.menu a:hover {
     </div>
   </section>
 
-  <!-- QUIZ DYNAMIC FORM -->
-  <section class="text-black p-0 w-full text-center mt-6">
-    <div id="quizContainer">
-      <div id="quizStart" class="text-center">
-        <button onclick="startQuiz()" class="btn btn-orange">Start Quiz</button>
-      </div>
+  <!-- Start Quiz Button (no white background) -->
+<div id="quizStart" class="text-center mt-6">
+  <button onclick="startQuiz()" class="btn btn-orange">Start Quiz</button>
+</div>
 
-      <form id="quizForm" class="space-y-6 hidden">
-        <div id="questionText" class="text-lg font-medium mb-4"></div>
-        <div id="answerButtons" class="flex flex-col gap-2"></div>
-        <div class="text-center mt-6">
-          <button type="button" id="nextBtn" class="btn btn-orange hidden">Next Question</button>
-          <button type="submit" id="resultBtn" class="btn btn-orange hidden">View My Results</button>
-        </div>
-      </form>
+<!-- Quiz Form in white container (only visible after starting) -->
+<section id="quizContainer" class="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-3/4 mx-auto mt-6 hidden">
+  <form id="quizForm" class="space-y-6">
+    <div id="questionText" class="text-lg font-medium mb-4"></div>
+    <div id="answerButtons" class="flex flex-col gap-2"></div>
+    <div class="text-center mt-6">
+      <button type="button" id="nextBtn" class="btn btn-orange hidden">Next Question</button>
+      <button type="submit" id="resultBtn" class="btn btn-orange hidden">View My Results</button>
     </div>
-  </section>
+  </form>
 </section>
+
 
 <script>
 const quizData = [
@@ -239,9 +238,10 @@ const answers = [];
 
 function startQuiz() {
   document.getElementById("quizStart").classList.add("hidden");
-  document.getElementById("quizForm").classList.remove("hidden");
+  document.getElementById("quizContainer").classList.remove("hidden");
   showQuestion();
 }
+
 
 function showQuestion() {
   const qData = quizData[currentQuestion];
