@@ -142,8 +142,48 @@ nav.menu a:hover {
     </style>
 </head>
 <body class="m-0">
-<!-- All other body content remains unchanged except for the quiz title section -->
-<!-- UPDATE: New layout for title, subtext, and right-aligned image -->
+
+<header class="hero flex items-center justify-between px-8 mt-2">
+    <div>
+        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/Purrfect.png" 
+             alt="Purrfect Match Logo" class="h-[36px]" />
+    </div>
+    <a href="http://localhost/purrfect_match/cat.php" class="btn btn-yellow shadow-md">Adopt Now</a>
+</header>
+
+<nav class="menu">
+  <a href="#info">Info</a>
+  <a href="#cat-quiz">Quiz</a>
+  <a href="#model-viewer">AR Feature</a>
+</nav>
+
+<div class="banner">
+    <img src="Assets/Purrfect Match AR Banner.png" alt="Banner Image" />
+</div>
+
+<section id="info" class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
+
+  <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
+    <img src="Assets/Info picture.png" alt="AR Cat Example"
+         class="w-full h-full object-cover rounded-lg"/>
+  </div>
+
+
+  <div class="flex-1 min-w-[200px]">
+    <h2 class="text-2xl font-bold mb-4" style="font-family: 'Fredoka', sans-serif;">
+      What is Augmented Reality?
+    </h2>
+    <p class="text-gray-800 text-sm mb-2">
+      Augmented Reality (AR) is a technology that blends digital elements—like 3D models, animations, and sounds—into the real world through your device’s camera. Unlike Virtual Reality (VR), which creates a completely virtual space, AR enhances the physical world around you.
+    </p>
+    <p class="text-gray-800 text-sm">
+      AR lets you view 3D cats through your phone's camera as if they were actually in your environment. This gives potential adopters a more personal and interactive way to see what a pet might look like in their home.
+    </p>
+  </div>
+</section>
+
+    <hr class="short-line" />
+    
 <section class="fade-in-section" id="cat-quiz">
   <section class="bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
     <!-- Left: Title and description -->
