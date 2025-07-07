@@ -455,65 +455,6 @@ nav.menu a:hover {
     }
 </script>
 
-    <script>
-    const answers = { q1: null, q2: null };
-    const buttons = document.querySelectorAll(".quiz-btn");
-
-    buttons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const q = btn.dataset.q;
-            const val = btn.dataset.value;
-
-            // Deselect other buttons in the same question group
-            document.querySelectorAll(.quiz-btn[data-q="${q}"]).forEach(b => {
-                b.classList.remove("selected");
-            });
-
-            // Select current button and record answer
-            btn.classList.add("selected");
-            answers[q] = val;
-        });
-    });
-
-    document.getElementById("quizForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (!answers.q1 || !answers.q2) {
-            alert("Please answer all questions.");
-            return;
-        }
-
-        // Determine result (simple logic example)
-        const resultMap = {
-            playful: "Tabby",
-            relaxed: "Siamese",
-            social: "Calico"
-        };
-
-        // Count most selected category
-        const counts = {};
-        Object.values(answers).forEach(val => {
-            counts[val] = (counts[val] || 0) + 1;
-        });
-
-        const mostSelected = Object.keys(counts).reduce((a, b) =>
-            counts[a] > counts[b] ? a : b
-        );
-
-        const breedName = resultMap[mostSelected];
-        const breedPageMap = {
-            Tabby: "tabby-cat.php",
-            Siamese: "siamese-cat.php",
-            Calico: "calico-cat.php"
-        };
-
-        document.getElementById("breedName").textContent = breedName;
-        document.getElementById("viewCatLink").href = breedPageMap[breedName];
-        document.getElementById("quizResult").classList.remove("hidden");
-        window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
-    });
-</script>
-
     <style>
     .quiz-btn {
         background-color: #FEF3C7; /* Tailwind yellow-100 */
