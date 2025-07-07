@@ -187,20 +187,23 @@ nav.menu a:hover {
 
     <hr class="short-line" />
 
-<!-- BEGIN: What Cat Breed Are You Title + Image -->
+<!-- BEGIN: What Cat Breed Are You Title + Image (Styled Like Info Section) -->
 <section class="fade-in-section" id="cat-quiz">
-  <div class="max-w-6xl mx-auto mt-10 px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-    <!-- Title -->
-    <h2 class="text-2xl font-bold text-center md:text-left flex-1" style="font-family: 'Fredoka', sans-serif;">
-      🐾 What Cat Breed Are You?
-    </h2>
+  <section class="bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
 
-    <!-- Right-side image -->
-    <div class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 flex-shrink-0">
-      <img src="Assets/Cat breed picture.jpg" alt="Cat Quiz Image"
-           class="w-full h-full object-cover rounded-lg" />
+    <!-- Left: Title -->
+    <div class="flex-1 min-w-[200px]">
+      <h2 class="text-2xl mb-2" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
+        🐾 What Cat Breed Are You?
+      </h2>
     </div>
-  </div>
+
+    <!-- Right: 1x1 image -->
+    <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
+      <img src="Assets/Cat breed picture.jpg" alt="Cat Quiz Image"
+           class="w-full h-full object-cover rounded-lg shadow-md" />
+    </div>
+  </section>
 
   <!-- QUIZ FORM STARTS BELOW -->
   <section class="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-3/4 mx-auto mt-6">
@@ -231,7 +234,6 @@ nav.menu a:hover {
     </form>
   </section>
 </section>
-
 
 
     <hr class="short-line" />
