@@ -186,51 +186,121 @@ nav.menu a:hover {
     
 <section class="fade-in-section" id="cat-quiz">
   <section class="bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
-    <!-- Left: Title and description -->
+    <!-- Title -->
     <div class="flex-1 min-w-[200px]">
       <h2 class="text-2xl mb-2" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
         🐾 What Cat Breed Are You?
       </h2>
-      <p class="text-gray-800 text-sm">
-        Ever wondered what kind of cat matches your personality? Take this quick quiz and find out your purrfect feline match! You'll be guided to a specific cat breed page based on your answers.
+      <p class="text-sm text-gray-800 mt-1">
+        Take this 8-question quiz to discover which cat breed best matches your personality! Tap "Start Quiz" to begin and answer each question honestly.
       </p>
     </div>
 
-    <!-- Right: 1x1 image with no styling -->
+    <!-- Right: Image -->
     <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
-      <img src="Assets/Cat breed picture.png" alt="Cat Quiz Image" class="w-full h-full object-cover" />
+      <img src="Assets/Cat breed picture.jpg" alt="Cat Quiz Image" class="w-full h-full object-cover rounded-lg" />
     </div>
   </section>
 
-  <!-- QUIZ FORM STARTS BELOW -->
+  <!-- QUIZ DYNAMIC FORM -->
   <section class="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-3/4 mx-auto mt-6">
-    <form id="quizForm" class="space-y-6">
-      <!-- Question 1 -->
-      <div>
-        <p class="font-medium mb-2">1. What’s your ideal weekend?</p>
-        <div class="flex flex-col gap-2">
-          <button type="button" class="quiz-btn" data-q="q1" data-value="playful">Exploring outdoors or playing sports</button>
-          <button type="button" class="quiz-btn" data-q="q1" data-value="relaxed">Relaxing at home with a book or Netflix</button>
-          <button type="button" class="quiz-btn" data-q="q1" data-value="social">Going out with friends or trying new cafes</button>
-        </div>
+    <div id="quizContainer">
+      <div id="quizStart" class="text-center">
+        <button onclick="startQuiz()" class="btn btn-orange">Start Quiz</button>
       </div>
 
-      <!-- Question 2 -->
-      <div>
-        <p class="font-medium mb-2">2. Pick a personality trait:</p>
-        <div class="flex flex-col gap-2">
-          <button type="button" class="quiz-btn" data-q="q2" data-value="playful">Adventurous</button>
-          <button type="button" class="quiz-btn" data-q="q2" data-value="relaxed">Gentle</button>
-          <button type="button" class="quiz-btn" data-q="q2" data-value="social">Charming</button>
+      <form id="quizForm" class="space-y-6 hidden">
+        <div id="questionText" class="text-lg font-medium mb-4"></div>
+        <div id="answerButtons" class="flex flex-col gap-2"></div>
+        <div class="text-center mt-6">
+          <button type="button" id="nextBtn" class="btn btn-orange hidden">Next Question</button>
+          <button type="submit" id="resultBtn" class="btn btn-orange hidden">View My Results</button>
         </div>
-      </div>
-
-      <div class="text-center mt-6">
-        <button type="submit" class="btn btn-orange">Find Out!</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </section>
 </section>
+
+<script>
+  const quizData = [
+    { q: "What’s your ideal weekend?", a: ["Exploring outdoors", "Relaxing at home", "Café hopping"] },
+    { q: "Pick a personality trait:", a: ["Adventurous", "Gentle", "Charming"] },
+    { q: "What's your energy level like?", a: ["High and active", "Balanced", "Calm and lazy"] },
+    { q: "Choose a hobby:", a: ["Hiking or sports", "Reading or gaming", "Socializing"] },
+    { q: "Your favorite time of day?", a: ["Morning", "Evening", "Night"] },
+    { q: "How do you react to new people?", a: ["Curious and bold", "Shy but friendly", "Cautious"] },
+    { q: "Pick a cozy spot:", a: ["Sunny windowsill", "Comfy bed", "By the fireplace"] },
+    { q: "What role do you play in a group?", a: ["Leader", "Supporter", "Entertainer"] }
+  ];
+
+  let currentQuestion = 0;
+  const answers = [];
+
+  function startQuiz() {
+    document.getElementById("quizStart").classList.add("hidden");
+    document.getElementById("quizForm").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const qData = quizData[currentQuestion];
+    const questionEl = document.getElementById("questionText");
+    const answersEl = document.getElementById("answerButtons");
+    const nextBtn = document.getElementById("nextBtn");
+    const resultBtn = document.getElementById("resultBtn");
+
+    questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
+    answersEl.innerHTML = "";
+    qData.a.forEach(option => {
+      const btn = document.createElement("button");
+      btn.className = "quiz-btn";
+      btn.textContent = option;
+      btn.onclick = () => {
+        answers[currentQuestion] = option;
+        document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        nextBtn.classList.remove("hidden");
+      };
+      answersEl.appendChild(btn);
+    });
+
+    nextBtn.classList.add("hidden");
+    resultBtn.classList.add("hidden");
+
+    if (currentQuestion === quizData.length - 1) {
+      nextBtn.classList.add("hidden");
+      resultBtn.classList.remove("hidden");
+    }
+  }
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    if (answers[currentQuestion]) {
+      currentQuestion++;
+      showQuestion();
+    } else {
+      alert("Please select an answer.");
+    }
+  });
+
+  document.getElementById("quizForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Simple scoring logic
+    const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
+    answers.forEach(ans => {
+      if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
+      if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
+      if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
+    });
+
+    const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
+
+    document.getElementById("quizResult").classList.remove("hidden");
+    document.getElementById("breedName").textContent = breed;
+    document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
+    window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
+  });
+</script>
 
 
     <hr class="short-line" />
