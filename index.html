@@ -162,15 +162,14 @@ nav.menu a:hover {
     <img src="Assets/Purrfect Match AR Banner.png" alt="Banner Image" />
 </div>
 
-<section id="info" class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
-
+<section id="info" class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-4xl mx-auto rounded-lg">
+  <!-- Left Image -->
   <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
-    <img src="Assets/Info picture.png" alt="AR Cat Example"
-         class="w-full h-full object-cover rounded-lg"/>
+    <img src="Assets/Info picture.png" alt="AR Cat Example" class="w-full h-full object-cover rounded-lg"/>
   </div>
 
-
-  <div class="flex-1 min-w-[200px]">
+  <!-- Right Text -->
+  <div class="flex-1 max-w-2xl min-w-[200px]">
     <h2 class="text-2xl font-bold mb-4" style="font-family: 'Fredoka', sans-serif;">
       What is Augmented Reality?
     </h2>
@@ -183,13 +182,13 @@ nav.menu a:hover {
   </div>
 </section>
 
+
     <hr class="short-line" />
     
-<section class="fade-in-section" id="cat-quiz">
-  <section class="bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
+<section class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-4xl mx-auto rounded-lg" id="cat-quiz">
     <!-- Title -->
     <div class="flex-1 min-w-[200px]">
-      <h2 class="text-2xl mb-2" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
+      <h2 class="text-2xl font-bold mb-2" style="font-family: 'Fredoka', sans-serif;">
         🐾 What Cat Breed Are You?
       </h2>
       <p class="text-sm text-gray-800 mt-1">
@@ -198,8 +197,8 @@ nav.menu a:hover {
     </div>
 
     <!-- Right: Image -->
-    <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
-      <img src="Assets/Cat breed picture.png" alt="Cat Quiz Image" class="w-full h-full object-cover rounded-lg" />
+  <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
+    <img src="Assets/Cat breed picture.png" alt="Cat Quiz Image" class="w-full h-full object-cover rounded-lg" />
     </div>
   </section>
 
@@ -320,22 +319,22 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     <hr class="short-line" />
 
     <!-- Augmented Reality Feature Section -->
-<section class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg mt-12">
-  <!-- Left: Image -->
+
+<section class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-4xl mx-auto rounded-lg mt-12">
+  <!-- Left Image -->
   <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
-    <img src="Assets/AR feature picture.png" alt="AR Feature Image"
-         class="w-full h-full object-cover rounded-lg" />
+    <img src="Assets/AR feature picture.png" alt="AR Feature Image" class="w-full h-full object-cover rounded-lg" />
   </div>
 
-  <!-- Right: Title & Description -->
-  <div class="flex-1 min-w-[200px]">
+  <!-- Right Text -->
+  <div class="flex-1 max-w-2xl min-w-[200px]">
     <h2 class="text-2xl font-bold mb-4" style="font-family: 'Fredoka', sans-serif;">
       Augmented Reality Feature
     </h2>
-    <p class="text-gray-800 text-sm">
+    <p class="text-gray-800 text-sm leading-relaxed">
       Preview how each cat would appear in your own space with our 3D Augmented Reality experience.
-      Tap the button below to start the AR viewer and select a cat model to interact with. This allows adopters to visualize
-      the cats in their real-world environment for a more immersive experience.
+      Tap the button below to start the AR viewer and select a cat model to interact with. This allows adopters
+      to visualize the cats in their real-world environment for a more immersive experience.
     </p>
   </div>
 </section>
