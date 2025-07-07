@@ -188,39 +188,53 @@ nav.menu a:hover {
     <hr class="short-line" />
 
  <!-- BEGIN: What Cat Breed Are You Quiz -->
-    <section class="fade-in-section" id="cat-quiz">
-    <section id="cat-quiz" class="bg-white text-black p-6 mt-10 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2 mx-auto">
-    <h2 class="text-2xl font-bold mb-4 text-center" style="font-family: 'Fredoka', sans-serif;">
-  🐾 What Cat Breed Are You?
-</h2>
+    <div class="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 flex-shrink-0">
+      <img src="Assets/Quiz picture.jpg" alt="Cat Quiz Example"
+           class="w-full h-full object-cover rounded-lg" />
+    </div>
+<section class="fade-in-section" id="cat-quiz">
+  <!-- Moved Title OUTSIDE the container -->
+  <div class="max-w-6xl mx-auto mt-10 mb-4 px-4">
+    <h2 class="text-2xl font-bold text-center" style="font-family: 'Fredoka', sans-serif;">
+      🐾 What Cat Breed Are You?
+    </h2>
+  </div>
 
-    <form id="quizForm" class="space-y-6">
-
+  <!-- White container with image right-aligned -->
+  <section class="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-3/4 mx-auto flex flex-col md:flex-row gap-6 items-center">
+    
+    <!-- Left column: quiz form -->
+    <div class="flex-1">
+      <form id="quizForm" class="space-y-6">
         <!-- Question 1 -->
         <div>
-            <p class="font-medium mb-2">1. What’s your ideal weekend?</p>
-            <div class="flex flex-col gap-2">
-                <button type="button" class="quiz-btn" data-q="q1" data-value="playful">Exploring outdoors or playing sports</button>
-                <button type="button" class="quiz-btn" data-q="q1" data-value="relaxed">Relaxing at home with a book or Netflix</button>
-                <button type="button" class="quiz-btn" data-q="q1" data-value="social">Going out with friends or trying new cafes</button>
-            </div>
+          <p class="font-medium mb-2">1. What’s your ideal weekend?</p>
+          <div class="flex flex-col gap-2">
+            <button type="button" class="quiz-btn" data-q="q1" data-value="playful">Exploring outdoors or playing sports</button>
+            <button type="button" class="quiz-btn" data-q="q1" data-value="relaxed">Relaxing at home with a book or Netflix</button>
+            <button type="button" class="quiz-btn" data-q="q1" data-value="social">Going out with friends or trying new cafes</button>
+          </div>
         </div>
 
         <!-- Question 2 -->
         <div>
-            <p class="font-medium mb-2">2. Pick a personality trait:</p>
-            <div class="flex flex-col gap-2">
-                <button type="button" class="quiz-btn" data-q="q2" data-value="playful">Adventurous</button>
-                <button type="button" class="quiz-btn" data-q="q2" data-value="relaxed">Gentle</button>
-                <button type="button" class="quiz-btn" data-q="q2" data-value="social">Charming</button>
-            </div>
+          <p class="font-medium mb-2">2. Pick a personality trait:</p>
+          <div class="flex flex-col gap-2">
+            <button type="button" class="quiz-btn" data-q="q2" data-value="playful">Adventurous</button>
+            <button type="button" class="quiz-btn" data-q="q2" data-value="relaxed">Gentle</button>
+            <button type="button" class="quiz-btn" data-q="q2" data-value="social">Charming</button>
+          </div>
         </div>
 
         <div class="text-center mt-6">
-            <button type="submit" class="btn btn-orange">Find Out!</button>
+          <button type="submit" class="btn btn-orange">Find Out!</button>
         </div>
-    </form>
+      </form>
+    </div>
+
+  </section>
 </section>
+
 
     <hr class="short-line" />
 
