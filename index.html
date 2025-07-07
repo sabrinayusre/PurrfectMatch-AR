@@ -125,19 +125,28 @@
   opacity: 0.6;
 }
 
-.nav-link {
-  color: white;
-  font-weight: 600;
-  text-decoration: none;
+nav.menu {
+  width: 100%;
+  background-color: #3b2f2f; /* Dark, warm brown (goes well with oranges/yellows) */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 14px 0;
+  z-index: 50;
+}
+
+nav.menu a {
+  color: #fff; /* White text for contrast */
+  font-weight: 500;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 10px;
   transition: background-color 0.3s ease;
 }
 
-.nav-link:hover {
-  background-color: #F6A623; 
-  color: #333;
+nav.menu a:hover {
+  background-color: #5c3f3f; /* Slightly lighter hover color */
 }
+
 
 
 
@@ -156,14 +165,12 @@
     
 </header>
 
-<!-- Navigation Menu Bar -->
-<nav class="w-full bg-[#F6A623] shadow-sm">
-  <div class="max-w-7xl mx-auto px-6 py-3 flex justify-center gap-10">
-    <a href="#info" class="nav-link">Info</a>
-    <a href="#cat-quiz" class="nav-link">Quiz</a>
-    <a href="#model-viewer" class="nav-link">AR Feature</a>
-  </div>
+<nav class="menu">
+  <a href="#info">Info</a>
+  <a href="#cat-quiz">Quiz</a>
+  <a href="#model-viewer">AR Feature</a>
 </nav>
+
 
 
     
