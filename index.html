@@ -29,7 +29,7 @@ header.hero {
   background: linear-gradient(180deg, #FFB74D 0%, #f3f4f6 100%);
   padding: 20px 32px;
   display: flex;
-    margin-top: 0;
+  margin-top: 0;
   justify-content: space-between;
   align-items: center;
   position: relative;
@@ -115,7 +115,8 @@ header.hero {
   font-weight: 700;
 }
 .short-line {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   margin: 20px auto;
   border: 0;
   border-top: 1px solid #000;
@@ -139,6 +140,17 @@ nav.menu a {
 }
 nav.menu a:hover {
   background-color: #4a3b3b;
+}
+@media (max-width: 768px) {
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .max-w-4xl {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
 }
     </style>
 </head>
