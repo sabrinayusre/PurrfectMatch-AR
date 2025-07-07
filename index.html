@@ -1,70 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Load Model Viewer -->
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <!-- Load Model Viewer -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet">
 
-<style>
-  /* Your existing styles here */
-  .fade-in-section {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease-out;
-  }
-  .fade-in-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f3f4f6;
-    margin: 0;
-  }
-  /* Buttons and other styling omitted for brevity - keep yours */
-  /* Quiz button styling */
-  .quiz-btn {
-      background-color: #FEF3C7; /* Tailwind yellow-100 */
-      padding: 12px;
-      border-radius: 8px;
-      transition: background-color 0.3s ease;
-      font-weight: 500;
-      text-align: left;
-      cursor: pointer;
-  }
-  .quiz-btn:hover {
-      background-color: #FDE68A; /* Tailwind yellow-200 */
-  }
-  .quiz-btn.selected {
-      background-color: #FDBA74; /* Tailwind orange-300 */
-      font-weight: 700;
-  }
-  .short-line {
-    width: 600px;
-    margin: 20px auto;
-    border: 0;
-    border-top: 1px solid #000;
-    opacity: 0.6;
-  }
-  nav.menu a {
-    color: #fff;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-  }
-  nav.menu a:hover {
-    background-color: #4a3b3b;
-  }
-</style>
+    <style>
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+}
+header.hero {
+  background: linear-gradient(180deg, #FFB74D 0%, #f3f4f6 100%);
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.btn {
+  font-weight: bold;
+  transition: 0.3s;
+  padding: 12px 24px;
+  border-radius: 20px;
+}
+.btn-yellow {
+  background-color: #FFB74D;
+  color: black;
+}
+.btn-yellow:hover {
+  background-color: #FF9800;
+}
+.btn-orange {
+  background-color: #FF9800;
+  color: white;
+  width: 250px;
+}
+.btn-orange:hover {
+  background-color: #E68900;
+}
+.banner img {
+  width: 100%;
+  height: auto;
+}
+.ar-instructions img {
+  width: 20px;
+  margin-left: 10px;
+}
+.images-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.note-container {
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.note-container p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+.quiz-btn {
+  background-color: #FEF3C7;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+  text-align: left;
+}
+.quiz-btn:hover {
+  background-color: #FDE68A;
+}
+.quiz-btn.selected {
+  background-color: #FDBA74;
+  font-weight: 700;
+}
+.short-line {
+  width: 600px;
+  margin: 20px auto;
+  border: 0;
+  border-top: 1px solid #000;
+  opacity: 0.6;
+}
+nav.menu {
+  width: 100%;
+  background-color: #2a1f1f;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 14px 0;
+  z-index: 50;
+}
+nav.menu a {
+  color: #fff;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+nav.menu a:hover {
+  background-color: #4a3b3b;
+}
+    </style>
 </head>
-
 <body class="m-0">
 
 <header class="hero flex items-center justify-between px-8 mt-2">
@@ -78,55 +154,61 @@
 <nav class="menu">
   <a href="#info">Info</a>
   <a href="#cat-quiz">Quiz</a>
-  <a href="#ar-feature">AR Feature</a>
+  <a href="#model-viewer">AR Feature</a>
 </nav>
 
 <div class="banner">
     <img src="Assets/Purrfect Match AR Banner.png" alt="Banner Image" />
 </div>
 
-<!-- Info Section -->
 <section id="info" class="fade-in-section bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
+
   <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
     <img src="Assets/Info picture.png" alt="AR Cat Example"
          class="w-full h-full object-cover rounded-lg"/>
   </div>
+
+
   <div class="flex-1 min-w-[200px]">
     <h2 class="text-2xl font-bold mb-4" style="font-family: 'Fredoka', sans-serif;">
       What is Augmented Reality?
     </h2>
     <p class="text-gray-800 text-sm mb-2">
-      Augmented Reality (AR) blends 3D models into the real world through your device’s camera...
+      Augmented Reality (AR) is a technology that blends digital elements—like 3D models, animations, and sounds—into the real world through your device’s camera. Unlike Virtual Reality (VR), which creates a completely virtual space, AR enhances the physical world around you.
     </p>
     <p class="text-gray-800 text-sm">
-      AR lets you view 3D cats as if they were actually in your environment.
+      AR lets you view 3D cats through your phone's camera as if they were actually in your environment. This gives potential adopters a more personal and interactive way to see what a pet might look like in their home.
     </p>
   </div>
 </section>
 
-<hr class="short-line" />
-
-<!-- Quiz Section -->
+    <hr class="short-line" />
+    
 <section class="fade-in-section" id="cat-quiz">
   <section class="bg-orange-300 p-6 text-left flex flex-col md:flex-row md:items-start gap-6 max-w-6xl mx-auto rounded-lg">
+    <!-- Title -->
     <div class="flex-1 min-w-[200px]">
       <h2 class="text-2xl mb-2" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
         🐾 What Cat Breed Are You?
       </h2>
       <p class="text-sm text-gray-800 mt-1">
-        Take this 8-question quiz to discover your cat breed match!
+        Take this 8-question quiz to discover which cat breed best matches your personality! Tap "Start Quiz" to begin and answer each question honestly.
       </p>
     </div>
+
+    <!-- Right: Image -->
     <div class="flex-shrink-0 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40">
       <img src="Assets/Cat breed picture.png" alt="Cat Quiz Image" class="w-full h-full object-cover rounded-lg" />
     </div>
   </section>
 
-  <section class="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 mx-auto mt-6">
+  <!-- QUIZ DYNAMIC FORM -->
+  <section class="bg-white text-black p-6 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-3/4 mx-auto mt-6">
     <div id="quizContainer">
       <div id="quizStart" class="text-center">
         <button onclick="startQuiz()" class="btn btn-orange">Start Quiz</button>
       </div>
+
       <form id="quizForm" class="space-y-6 hidden">
         <div id="questionText" class="text-lg font-medium mb-4"></div>
         <div id="answerButtons" class="flex flex-col gap-2"></div>
@@ -136,60 +218,137 @@
         </div>
       </form>
     </div>
-
-    <div id="quizResult" class="mt-6 text-center hidden">
-      <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
-      <a id="viewCatLink" href="#" class="text-blue-600 underline mt-2 inline-block">View your cat!</a>
-    </div>
-
-    <section class="fade-in-section images-container mt-6 flex justify-center gap-4 flex-wrap">
-      <div class="img-wrapper">
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png" alt="Tabby" class="image" />
-      </div>
-      <div class="img-wrapper">
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png" alt="Siamese" class="image" />
-      </div>
-      <div class="img-wrapper">
-        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png" alt="Calico" class="image" />
-      </div>
-    </section>
   </section>
 </section>
 
-<!-- AR Feature Section -->
-<section id="ar-feature" class="fade-in-section max-w-lg mx-auto p-6 mt-10 bg-yellow-200 rounded-md shadow-md text-gray-700 text-center text-sm font-medium">
-  <p>
-    *Please note that the 3D models may appear different from the preview images, as some visual elements like hair particles are not supported.
-  </p>
-  <h2 class="text-lg font-bold flex items-center justify-center mt-4" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
-    <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2" />
-    How to Use AR
-  </h2>
-  <p class="mt-2 text-sm">
-    1. Click the "Start AR" button to begin.<br/>
-    2. Allow camera access when prompted.<br/>
-    3. Point your camera at a flat surface to place the 3D cat.<br/>
-    4. Use touch gestures to zoom, rotate, or move the model.<br/>
-    <strong>Note:</strong> For best experience, use your mobile phone.
-  </p>
-  <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
+<script>
+  const quizData = [
+    { q: "What’s your ideal weekend?", a: ["Exploring outdoors", "Relaxing at home", "Café hopping"] },
+    { q: "Pick a personality trait:", a: ["Adventurous", "Gentle", "Charming"] },
+    { q: "What's your energy level like?", a: ["High and active", "Balanced", "Calm and lazy"] },
+    { q: "Choose a hobby:", a: ["Hiking or sports", "Reading or gaming", "Socializing"] },
+    { q: "Your favorite time of day?", a: ["Morning", "Evening", "Night"] },
+    { q: "How do you react to new people?", a: ["Curious and bold", "Shy but friendly", "Cautious"] },
+    { q: "Pick a cozy spot:", a: ["Sunny windowsill", "Comfy bed", "By the fireplace"] },
+    { q: "What role do you play in a group?", a: ["Leader", "Supporter", "Entertainer"] }
+  ];
+
+  let currentQuestion = 0;
+  const answers = [];
+
+  function startQuiz() {
+    document.getElementById("quizStart").classList.add("hidden");
+    document.getElementById("quizForm").classList.remove("hidden");
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const qData = quizData[currentQuestion];
+    const questionEl = document.getElementById("questionText");
+    const answersEl = document.getElementById("answerButtons");
+    const nextBtn = document.getElementById("nextBtn");
+    const resultBtn = document.getElementById("resultBtn");
+
+    questionEl.textContent = ${currentQuestion + 1}. ${qData.q};
+    answersEl.innerHTML = "";
+    qData.a.forEach(option => {
+      const btn = document.createElement("button");
+      btn.className = "quiz-btn";
+      btn.textContent = option;
+      btn.onclick = () => {
+        answers[currentQuestion] = option;
+        document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        nextBtn.classList.remove("hidden");
+      };
+      answersEl.appendChild(btn);
+    });
+
+    nextBtn.classList.add("hidden");
+    resultBtn.classList.add("hidden");
+
+    if (currentQuestion === quizData.length - 1) {
+      nextBtn.classList.add("hidden");
+      resultBtn.classList.remove("hidden");
+    }
+  }
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    if (answers[currentQuestion]) {
+      currentQuestion++;
+      showQuestion();
+    } else {
+      alert("Please select an answer.");
+    }
+  });
+
+  document.getElementById("quizForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    // Simple scoring logic
+    const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
+    answers.forEach(ans => {
+      if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
+      if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
+      if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
+    });
+
+    const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
+
+    document.getElementById("quizResult").classList.remove("hidden");
+    document.getElementById("breedName").textContent = breed;
+    document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
+    window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
+  });
+</script>
+
+
+    <hr class="short-line" />
+
+
+    <div id="quizResult" class="mt-6 text-center hidden">
+        <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
+        <a id="viewCatLink" href="#" class="text-blue-600 underline mt-2 inline-block">View your cat!</a>
+    </div>
+<section class="fade-in-section images-container mt-6 flex justify-center gap-4 flex-wrap">
+    <div class="img-wrapper">
+        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/tabby%201.png" 
+             alt="Image 1" class="image" />
+    </div>
+    <div class="img-wrapper">
+        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/siamese.png" 
+             alt="Image 2" class="image" />
+    </div>
+    <div class="img-wrapper">
+        <img src="https://raw.githubusercontent.com/sabrinayusre/PurrfectMatch-AR/main/Assets/calico.png" 
+             alt="Image 3" class="image" />
+    </div>
+</section>
+
+<section>
+    <section class="fade-in-section" id="ar-feature">
+    <div class="bg-yellow-200 text-gray-700 text-center text-sm font-medium mt-4 max-w-lg mx-auto p-3 rounded-md shadow-md">
+        *Please note that the 3D models may appear different from the preview images, as certain visual elements, such as hair particles, are not supported in the current file format.
+    </div>
+</section>
+
 </section>
 
 <div class="text-center my-10">
-  <button onclick="startAR()" class="btn btn-orange shadow-md"><b>Start AR</b></button>
+    <button onclick="startAR()" class="btn btn-orange shadow-md"><b>Start AR</b></button>
 </div>
 
 <div class="mb-6 text-center">
-  <label for="model-selector" class="text-lg font-medium">Choose a 3D Cat Model:</label>
-  <select id="model-selector" class="p-2 bg-yellow-100 rounded-md mt-2">
-      <option value="Assets/Purrfect Match Tuxedo.glb">Tuxedo Cat</option>
-      <option value="Assets/Purrfect Match Siamese.glb">Siamese Cat</option>
-      <option value="Assets/Purrfect Match Calico.glb">Calico Cat</option>
-  </select>
+    <label for="model-selector" class="text-lg font-medium">Choose a 3D Cat Model:</label>
+    <select id="model-selector" class="p-2 bg-yellow-100 rounded-md mt-2">
+        <option value="Assets/Purrfect Match Tuxedo.glb">Tuxedo Cat</option>
+        <option value="Assets/Purrfect Match Siamese.glb">Siamese Cat</option>
+        <option value="Assets/Purrfect Match Calico.glb">Calico Cat</option>
+    </select>
 </div>
 
 <div class="flex justify-center my-10">
-  <model-viewer 
+   <model-viewer 
     id="model-viewer"
     src="Assets/Purrfect Match Tuxedo.glb"
     ios-src="Assets/Purrfect Match Tuxedo.usdz"
@@ -205,172 +364,73 @@
     ar-modes="webxr scene-viewer quick-look"
     ar-scale="auto"
     style="width: 100%; max-width: 500px; height: 500px;">
-  </model-viewer>
+</model-viewer>
+
 </div>
 
 <script>
-  // Quiz logic
-  const quizData = [
-    { q: "What’s your ideal weekend?", a: ["Exploring outdoors", "Relaxing at home", "Café hopping"] },
-    { q: "Pick a personality trait:", a: ["Adventurous", "Gentle", "Charming"] },
-    { q: "What's your energy level like?", a: ["High and active", "Balanced", "Calm and lazy"] },
-    { q: "Choose a hobby:", a: ["Hiking or sports", "Reading or gaming", "Socializing"] },
-    { q: "Your favorite time of day?", a: ["Morning", "Evening", "Night"] },
-    { q: "How do you react to new people?", a: ["Curious and bold", "Shy but friendly", "Cautious"] },
-    { q: "Pick a cozy spot:", a: ["Sunny windowsill", "Comfy bed", "By the fireplace"] },
-    { q: "What role do you play in a group?", a: ["Leader", "Supporter", "Entertainer"] }
-  ];
+    document.getElementById("model-selector").addEventListener("change", function () {
+        const selectedModel = this.value;
+        const modelViewer = document.getElementById("model-viewer");
 
-  let currentQuestion = 0;
-  const answers = new Array(quizData.length).fill(null);
+        const models = {
+            "Assets/Purrfect Match Tuxedo.glb": {
+                glb: "Assets/Purrfect Match Tuxedo.glb",
+                usdz: "Assets/Purrfect Match Tuxedo.usdz"
+            },
+            "Assets/Purrfect Match Siamese.glb": {
+                glb: "Assets/Purrfect Match Siamese.glb",
+                usdz: "Assets/Purrfect Match Siamese.usdz"
+            },
+            "Assets/Purrfect Match Calico.glb": {
+                glb: "Assets/Purrfect Match Calico.glb",
+                usdz: "Assets/Purrfect Match Calico.usdz"
+            }
+        };
 
-  function startQuiz() {
-    document.getElementById("quizStart").classList.add("hidden");
-    document.getElementById("quizForm").classList.remove("hidden");
-    showQuestion();
-  }
+        modelViewer.setAttribute("src", models[selectedModel].glb);
+        modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
+    });
 
-  function showQuestion() {
-    const qData = quizData[currentQuestion];
-    const questionEl = document.getElementById("questionText");
-    const answersEl = document.getElementById("answerButtons");
-    const nextBtn = document.getElementById("nextBtn");
-    const resultBtn = document.getElementById("resultBtn");
-
-    questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
-    answersEl.innerHTML = "";
-
-    nextBtn.disabled = true;
-    resultBtn.disabled = true;
-
-    qData.a.forEach(option => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "quiz-btn";
-      btn.textContent = option;
-
-      if (answers[currentQuestion] === option) {
-        btn.classList.add("selected");
-        nextBtn.disabled = false;
-        if (currentQuestion === quizData.length - 1) resultBtn.disabled = false;
-      }
-
-      btn.onclick = () => {
-        answers[currentQuestion] = option;
-        document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-
-        if (currentQuestion === quizData.length - 1) {
-          nextBtn.classList.add("hidden");
-          resultBtn.classList.remove("hidden");
-          resultBtn.disabled = false;
+    function startAR() {
+        const modelViewer = document.getElementById("model-viewer");
+        if (modelViewer.hasAttribute("ar")) {
+            modelViewer.activateAR();
         } else {
-          nextBtn.classList.remove("hidden");
-          resultBtn.classList.add("hidden");
-          nextBtn.disabled = false;
+            const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+                ? modelViewer.getAttribute("ios-src")
+                : modelViewer.getAttribute("src");
+            window.open(arUrl, "_blank");
         }
-      };
-
-      answersEl.appendChild(btn);
-    });
-
-    if (currentQuestion === quizData.length - 1) {
-      nextBtn.classList.add("hidden");
-      resultBtn.classList.remove("hidden");
-      resultBtn.disabled = answers[currentQuestion] ? false : true;
-    } else {
-      nextBtn.classList.remove("hidden");
-      nextBtn.disabled = answers[currentQuestion] ? false : true;
-      resultBtn.classList.add("hidden");
     }
-  }
-
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    if (!answers[currentQuestion]) {
-      alert("Please select an answer.");
-      return;
-    }
-    currentQuestion++;
-    showQuestion();
-  });
-
-  document.getElementById("quizForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    if (answers.includes(null)) {
-      alert("Please complete all questions.");
-      return;
-    }
-
-    const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
-    answers.forEach(ans => {
-      if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
-      if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
-      if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
-    });
-
-    const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
-
-    document.getElementById("breedName").textContent = breed;
-    document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
-    document.getElementById("quizResult").classList.remove("hidden");
-
-    window.scrollTo({ top: document.getElementById("quizResult").offsetTop - 100, behavior: "smooth" });
-  });
-
-  // AR model switching
-  document.getElementById("model-selector").addEventListener("change", function () {
-    const selectedModel = this.value;
-    const modelViewer = document.getElementById("model-viewer");
-
-    const models = {
-      "Assets/Purrfect Match Tuxedo.glb": {
-        glb: "Assets/Purrfect Match Tuxedo.glb",
-        usdz: "Assets/Purrfect Match Tuxedo.usdz"
-      },
-      "Assets/Purrfect Match Siamese.glb": {
-        glb: "Assets/Purrfect Match Siamese.glb",
-        usdz: "Assets/Purrfect Match Siamese.usdz"
-      },
-      "Assets/Purrfect Match Calico.glb": {
-        glb: "Assets/Purrfect Match Calico.glb",
-        usdz: "Assets/Purrfect Match Calico.usdz"
-      }
-    };
-
-    modelViewer.setAttribute("src", models[selectedModel].glb);
-    modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
-  });
-
-  // AR start function
-  function startAR() {
-    const modelViewer = document.getElementById("model-viewer");
-    if (modelViewer.hasAttribute("ar")) {
-      modelViewer.activateAR().catch(err => {
-        alert("AR is not supported on your device or browser.");
-        console.error(err);
-      });
-    } else {
-      // fallback to open model
-      const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-        ? modelViewer.getAttribute("ios-src")
-        : modelViewer.getAttribute("src");
-      window.open(arUrl, "_blank");
-    }
-  }
-
-  // Intersection observer for fade-in
-  const sections = document.querySelectorAll(".fade-in-section");
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  sections.forEach(section => observer.observe(section));
 </script>
+
+<style>
+    .quiz-btn {
+        @apply bg-yellow-100 p-3 rounded-md hover:bg-yellow-200 transition;
+    }
+    .quiz-btn.selected {
+        @apply bg-orange-300 font-semibold;
+    }
+</style>
+   
+<div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
+    <div class="ar-instructions"></div>
+    <h2 class="text-lg font-bold flex items-center justify-center" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
+    <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2" />
+    How to Use AR
+</h2>
+
+    <p class="mt-2 text-sm text-black">
+        1. Click the "Start AR" button to begin. <br />
+        2. Allow camera access when prompted. <br />
+        3. Point your camera at a flat surface to place the 3D cat. <br />
+        4. Use touch gestures to zoom, rotate, or move the model. <br />
+        Note: It is recommended to experience AR using your mobile phones.
+    </p>
+    <a href="http://localhost/purrfect_match/index.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
+</div>
+
 
 <!-- Back to Top Button -->
 <button onclick="scrollToTop()" id="backToTopBtn" 
@@ -379,9 +439,9 @@
 </button>
 
 <script>
-  window.onscroll = function () {
-    const backToTopBtn = document.getElementById("backToTopBtn");
-    if (document.body.scrollTop > 300 || documentElement.scrollTop > 300) {
+    window.onscroll = function () {
+        const backToTopBtn = document.getElementById("backToTopBtn");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
             backToTopBtn.classList.remove("hidden");
         } else {
             backToTopBtn.classList.add("hidden");
@@ -403,7 +463,7 @@
             const val = btn.dataset.value;
 
             // Deselect other buttons in the same question group
-            document.querySelectorAll(`.quiz-btn[data-q="${q}"]`).forEach(b => {
+            document.querySelectorAll(.quiz-btn[data-q="${q}"]).forEach(b => {
                 b.classList.remove("selected");
             });
 
