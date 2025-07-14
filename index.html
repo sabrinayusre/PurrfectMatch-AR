@@ -437,26 +437,28 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     <script>
   async function startAR() {
     try {
-      // Request camera access
+      // Ask for camera permission
       await navigator.mediaDevices.getUserMedia({ video: true });
 
-      // If granted, launch AR
+      // Simulate click on <model-viewer> to trigger native AR
       const modelViewer = document.getElementById("model-viewer");
-      if (modelViewer.hasAttribute("ar")) {
+
+      // Only supported on AR-enabled devices/browsers
+      if (modelViewer && modelViewer.canActivateAR) {
         modelViewer.activateAR();
       } else {
-        const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-          ? modelViewer.getAttribute("ios-src")
-          : modelViewer.getAttribute("src");
+        // Fallback: open .glb or .usdz in new tab
+        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const arUrl = isIOS ? modelViewer.getAttribute("ios-src") : modelViewer.getAttribute("src");
         window.open(arUrl, "_blank");
       }
     } catch (error) {
-      // If camera access is denied
+      // Show a custom message if user blocks camera access
       document.getElementById("cameraWarning").classList.remove("hidden");
     }
   }
-
 </script>
+
    
 <div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
     <div class="ar-instructions"></div>
@@ -536,7 +538,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   });
 </script>
 
-    <!-- Camera permission warning modal -->
+   <!-- Camera permission warning modal -->
 <div id="cameraWarning" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
   <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
     <p class="text-gray-800 text-sm mb-4">
