@@ -434,6 +434,19 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
         modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
     });
 
+<!-- AR Warning Modal -->
+<div id="ar-warning-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
+    <h2 class="text-xl font-bold text-red-600 mb-4">AR Not Supported</h2>
+    <p class="text-sm text-gray-800 mb-4">
+      Your device or browser does not support Augmented Reality.<br>
+      Please use <b>Google Chrome on Android</b> or <b>Safari on iOS</b> for the best experience.
+    </p>
+    <button onclick="closeARWarning()" class="btn btn-orange px-4 py-2">OK</button>
+  </div>
+</div>
+
+    
     <script>
   async function startAR() {
     try {
@@ -547,6 +560,45 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     <button onclick="document.getElementById('cameraWarning').classList.add('hidden')" class="btn btn-orange w-full">Okay</button>
   </div>
 </div>
+
+    <script>
+  function isARSupported() {
+    const ua = navigator.userAgent;
+
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+
+    // Allow only Chrome on Android and Safari on iOS
+    return (isAndroid && isChrome) || (isIOS && isSafari);
+  }
+
+  function showARWarning() {
+    document.getElementById("ar-warning-modal").classList.remove("hidden");
+  }
+
+  function closeARWarning() {
+    document.getElementById("ar-warning-modal").classList.add("hidden");
+  }
+
+  function startAR() {
+    if (!isARSupported()) {
+      showARWarning();
+      return;
+    }
+
+    const modelViewer = document.getElementById("model-viewer");
+    if (modelViewer.hasAttribute("ar")) {
+      modelViewer.activateAR();
+    } else {
+      const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+        ? modelViewer.getAttribute("ios-src")
+        : modelViewer.getAttribute("src");
+      window.open(arUrl, "_blank");
+    }
+  }
+</script>
 
     
 </body>
