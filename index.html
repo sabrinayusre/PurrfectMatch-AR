@@ -434,17 +434,28 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
         modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
     });
 
-    function startAR() {
-        const modelViewer = document.getElementById("model-viewer");
-        if (modelViewer.hasAttribute("ar")) {
-            modelViewer.activateAR();
-        } else {
-            const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-                ? modelViewer.getAttribute("ios-src")
-                : modelViewer.getAttribute("src");
-            window.open(arUrl, "_blank");
-        }
+    <script>
+  async function startAR() {
+    try {
+      // Request camera access
+      await navigator.mediaDevices.getUserMedia({ video: true });
+
+      // If granted, launch AR
+      const modelViewer = document.getElementById("model-viewer");
+      if (modelViewer.hasAttribute("ar")) {
+        modelViewer.activateAR();
+      } else {
+        const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+          ? modelViewer.getAttribute("ios-src")
+          : modelViewer.getAttribute("src");
+        window.open(arUrl, "_blank");
+      }
+    } catch (error) {
+      // If camera access is denied
+      document.getElementById("cameraWarning").classList.remove("hidden");
     }
+  }
+
 </script>
    
 <div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
@@ -524,6 +535,16 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     observer.observe(section);
   });
 </script>
+
+    <!-- Camera permission warning modal -->
+<div id="cameraWarning" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
+    <p class="text-gray-800 text-sm mb-4">
+      Camera access is required to use the AR feature. Please allow camera permissions in your browser settings and reload the page.
+    </p>
+    <button onclick="document.getElementById('cameraWarning').classList.add('hidden')" class="btn btn-orange w-full">Okay</button>
+  </div>
+</div>
 
     
 </body>
