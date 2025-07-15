@@ -504,35 +504,6 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   </div>
 </div>
 
-    
-    <script>
-  async function startAR() {
-    alert("This feature requires access to your camera.");
-
-    if (!isARSupported()) {
-      showARWarning();
-      return;
-    }
-
-    try {
-      await navigator.mediaDevices.getUserMedia({ video: true });
-
-      const modelViewer = document.getElementById("model-viewer");
-      if (modelViewer.hasAttribute("ar")) {
-        modelViewer.activateAR();
-      } else {
-        const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-          ? modelViewer.getAttribute("ios-src")
-          : modelViewer.getAttribute("src");
-        window.open(arUrl, "_blank");
-      }
-    } catch (err) {
-      document.getElementById("cameraWarning").classList.remove("hidden");
-    }
-  }
-</script>
-
-
    
 <div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
     <div class="ar-instructions"></div>
@@ -610,55 +581,6 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   sections.forEach(section => {
     observer.observe(section);
   });
-</script>
-
-   <!-- Camera permission warning modal -->
-<div id="cameraWarning" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-  <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
-    <p class="text-gray-800 text-sm mb-4">
-      Camera access is required to use the AR feature. Please allow camera permissions in your browser settings and reload the page.
-    </p>
-    <button onclick="document.getElementById('cameraWarning').classList.add('hidden')" class="btn btn-orange w-full">Okay</button>
-  </div>
-</div>
-
-    <script>
-  function isARSupported() {
-    const ua = navigator.userAgent;
-
-    const isAndroid = /Android/i.test(ua);
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-    const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
-    const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
-
-    // Allow only Chrome on Android and Safari on iOS
-    return (isAndroid && isChrome) || (isIOS && isSafari);
-  }
-
-  function showARWarning() {
-    document.getElementById("ar-warning-modal").classList.remove("hidden");
-  }
-
-  function closeARWarning() {
-    document.getElementById("ar-warning-modal").classList.add("hidden");
-  }
-
-  function startAR() {
-    if (!isARSupported()) {
-      showARWarning();
-      return;
-    }
-
-    const modelViewer = document.getElementById("model-viewer");
-    if (modelViewer.hasAttribute("ar")) {
-      modelViewer.activateAR();
-    } else {
-      const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-        ? modelViewer.getAttribute("ios-src")
-        : modelViewer.getAttribute("src");
-      window.open(arUrl, "_blank");
-    }
-  }
 </script>
 
     <div id="ar-warning-modal" class="hidden">
