@@ -152,27 +152,7 @@ nav.menu a:hover {
     width: 100%;
   }
 }
-
-<script>
-  function isARSupported() {
-    const ua = navigator.userAgent;
-    const isAndroid = /Android/i.test(ua);
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-    const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
-    const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
-    return (isAndroid && isChrome) || (isIOS && isSafari);
-  }
-
-  function showARWarning() {
-    document.getElementById("ar-warning-modal").classList.remove("hidden");
-  }
-
-  function closeARWarning() {
-    document.getElementById("ar-warning-modal").classList.add("hidden");
-  }
-</script>
-
-  #ar-warning-modal {
+#ar-warning-modal {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -189,8 +169,48 @@ nav.menu a:hover {
     text-align: center;
     max-width: 90%;
   }
+</style>
         
-    </style>
+<script>
+      function isARSupported() {
+        const ua = navigator.userAgent;
+        const isAndroid = /Android/i.test(ua);
+        const isIOS = /iPhone|iPad|iPod/i.test(ua);
+        const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
+        const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+        return (isAndroid && isChrome) || (isIOS && isSafari);
+      }
+
+      async function startAR() {
+        alert("This feature requires access to your camera.");
+
+        if (!isARSupported()) {
+          document.getElementById("ar-warning-modal").classList.remove("hidden");
+          return;
+        }
+
+        try {
+          await navigator.mediaDevices.getUserMedia({ video: true });
+
+          const modelViewer = document.getElementById("model-viewer");
+          if (modelViewer.hasAttribute("ar")) {
+            modelViewer.activateAR();
+          } else {
+            const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+              ? modelViewer.getAttribute("ios-src")
+              : modelViewer.getAttribute("src");
+            window.open(arUrl, "_blank");
+          }
+        } catch (err) {
+          document.getElementById("cameraWarning").classList.remove("hidden");
+        }
+      }
+
+      function closeARWarning() {
+        document.getElementById("ar-warning-modal").classList.add("hidden");
+      }
+    </script>
+        
 </head>
 <body class="m-0">
 
@@ -642,15 +662,25 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 </script>
 
     <div id="ar-warning-modal" class="hidden">
-  <div class="modal-box">
-    <h2 class="text-xl font-bold text-red-600 mb-2">AR Not Supported</h2>
-    <p class="text-sm text-gray-800 mb-4">
-      Your device or browser does not support Augmented Reality.<br>
-      Please use <b>Google Chrome on Android</b> or <b>Safari on iOS</b> for the best experience.
-    </p>
-    <button onclick="closeARWarning()" class="btn btn-orange px-4 py-2">OK</button>
+    <div class="modal-box">
+      <h2 class="text-xl font-bold text-red-600 mb-2">AR Not Supported</h2>
+      <p class="text-sm text-gray-800 mb-4">
+        Your device or browser does not support Augmented Reality.<br>
+        Please use <b>Google Chrome on Android</b> or <b>Safari on iOS</b> for the best experience.
+      </p>
+      <button onclick="closeARWarning()" class="btn btn-orange px-4 py-2">OK</button>
+    </div>
   </div>
-</div>
+
+  <!-- Camera Access Denied Modal -->
+  <div id="cameraWarning" class="hidden">
+    <div class="modal-box">
+      <p class="text-gray-800 text-sm mb-4">
+        Camera access is required to use the AR feature. Please allow camera permissions in your browser settings and reload the page.
+      </p>
+      <button onclick="document.getElementById('cameraWarning').classList.add('hidden')" class="btn btn-orange w-full">Okay</button>
+    </div>
+  </div>
 
     
 </body>
