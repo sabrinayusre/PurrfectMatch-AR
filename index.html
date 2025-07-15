@@ -491,38 +491,7 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
         modelViewer.setAttribute("src", models[selectedModel].glb);
         modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
     });
-
-<!-- AR Warning Modal -->
-<div id="ar-warning-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-  <div class="bg-white p-6 rounded-lg shadow-lg max-w-md text-center">
-    <h2 class="text-xl font-bold text-red-600 mb-4">AR Not Supported</h2>
-    <p class="text-sm text-gray-800 mb-4">
-      Your device or browser does not support Augmented Reality.<br>
-      Please use <b>Google Chrome on Android</b> or <b>Safari on iOS</b> for the best experience.
-    </p>
-    <button onclick="closeARWarning()" class="btn btn-orange px-4 py-2">OK</button>
-  </div>
-</div>
-
    
-<div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
-    <div class="ar-instructions"></div>
-    <h2 class="text-lg font-bold flex items-center justify-center" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
-    <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2" />
-    How to Use AR
-</h2>
-
-    <p class="mt-2 text-sm text-black">
-        1. Click the "Start AR" button to begin. <br />
-        2. Allow camera access when prompted. <br />
-        3. Point your camera at a flat surface to place the 3D cat. <br />
-        4. Use touch gestures to zoom, rotate, or move the model. <br />
-        Note: It is recommended to experience AR using your mobile phones.
-    </p>
-    <a href="http://localhost/purrfect-match/mainpage.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
-</div>
-
-
 <!-- Back to Top Button -->
 <button onclick="scrollToTop()" id="backToTopBtn" 
     class="fixed bottom-6 right-6 bg-[#FFB74D] text-black font-bold py-2 px-4 rounded-full shadow-md hidden">
@@ -604,6 +573,22 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     </div>
   </div>
 
+<div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
+    <div class="ar-instructions"></div>
+    <h2 class="text-lg font-bold flex items-center justify-center" style="font-family: 'Fredoka', sans-serif; font-weight: 700;">
+    <img src="Assets/help-252.png" alt="Help Icon" class="h-6 w-auto ml-2" />
+    How to Use AR
+</h2>
+
+    <p class="mt-2 text-sm text-black">
+        1. Click the "Start AR" button to begin. <br />
+        2. Allow camera access when prompted. <br />
+        3. Point your camera at a flat surface to place the 3D cat. <br />
+        4. Use touch gestures to zoom, rotate, or move the model. <br />
+        Note: It is recommended to experience AR using your mobile phones.
+    </p>
+    <a href="http://localhost/purrfect-match/mainpage.php" class="btn btn-orange mt-4 inline-block">Visit Adoption Homepage</a>
+</div>
     
 </body>
     <footer style="background-color: #2c2c2c; padding: 20px; text-align: center; margin-top: 60px; border-top: 1px solid #ddd;">
