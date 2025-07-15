@@ -172,14 +172,18 @@ nav.menu a:hover {
 </style>
         
 <script>
-      function isARSupported() {
-        const ua = navigator.userAgent;
-        const isAndroid = /Android/i.test(ua);
-        const isIOS = /iPhone|iPad|iPod/i.test(ua);
-        const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
-        const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
-        return (isAndroid && isChrome) || (isIOS && isSafari);
-      }
+     function isARSupported() {
+  const ua = navigator.userAgent;
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+
+  return isMobile && ((isAndroid && isChrome) || (isIOS && isSafari));
+}
+
+console.log("AR Supported:", isARSupported());
 
       async function startAR() {
         alert("This feature requires access to your camera.");
