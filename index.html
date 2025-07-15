@@ -152,6 +152,44 @@ nav.menu a:hover {
     width: 100%;
   }
 }
+
+<script>
+  function isARSupported() {
+    const ua = navigator.userAgent;
+    const isAndroid = /Android/i.test(ua);
+    const isIOS = /iPhone|iPad|iPod/i.test(ua);
+    const isChrome = /Chrome/.test(ua) && /Google Inc/.test(navigator.vendor);
+    const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+    return (isAndroid && isChrome) || (isIOS && isSafari);
+  }
+
+  function showARWarning() {
+    document.getElementById("ar-warning-modal").classList.remove("hidden");
+  }
+
+  function closeARWarning() {
+    document.getElementById("ar-warning-modal").classList.add("hidden");
+  }
+</script>
+
+  #ar-warning-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #ar-warning-modal .modal-box {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    max-width: 90%;
+  }
+        
     </style>
 </head>
 <body class="m-0">
@@ -449,28 +487,31 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     
     <script>
   async function startAR() {
+    alert("This feature requires access to your camera.");
+
+    if (!isARSupported()) {
+      showARWarning();
+      return;
+    }
+
     try {
-      // Ask for camera permission
       await navigator.mediaDevices.getUserMedia({ video: true });
 
-      // Simulate click on <model-viewer> to trigger native AR
       const modelViewer = document.getElementById("model-viewer");
-
-      // Only supported on AR-enabled devices/browsers
-      if (modelViewer && modelViewer.canActivateAR) {
+      if (modelViewer.hasAttribute("ar")) {
         modelViewer.activateAR();
       } else {
-        // Fallback: open .glb or .usdz in new tab
-        const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        const arUrl = isIOS ? modelViewer.getAttribute("ios-src") : modelViewer.getAttribute("src");
+        const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+          ? modelViewer.getAttribute("ios-src")
+          : modelViewer.getAttribute("src");
         window.open(arUrl, "_blank");
       }
-    } catch (error) {
-      // Show a custom message if user blocks camera access
+    } catch (err) {
       document.getElementById("cameraWarning").classList.remove("hidden");
     }
   }
 </script>
+
 
    
 <div class="bg-yellow-200 text-black p-6 mt-6 text-center rounded-lg w-3/4 mx-auto shadow-md">
@@ -599,6 +640,17 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     }
   }
 </script>
+
+    <div id="ar-warning-modal" class="hidden">
+  <div class="modal-box">
+    <h2 class="text-xl font-bold text-red-600 mb-2">AR Not Supported</h2>
+    <p class="text-sm text-gray-800 mb-4">
+      Your device or browser does not support Augmented Reality.<br>
+      Please use <b>Google Chrome on Android</b> or <b>Safari on iOS</b> for the best experience.
+    </p>
+    <button onclick="closeARWarning()" class="btn btn-orange px-4 py-2">OK</button>
+  </div>
+</div>
 
     
 </body>
