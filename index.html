@@ -260,7 +260,7 @@ function showQuestion() {
   const nextBtn = document.getElementById("nextBtn");
   const resultBtn = document.getElementById("resultBtn");
 
-  questionEl.textContent = ${currentQuestion + 1}. ${qData.q};
+  questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
   answersEl.innerHTML = "";
 
   qData.a.forEach(option => {
@@ -274,7 +274,6 @@ function showQuestion() {
       document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
 
-      // Only reveal appropriate button
       if (currentQuestion === quizData.length - 1) {
         resultBtn.classList.remove("hidden");
         nextBtn.classList.add("hidden");
@@ -286,10 +285,10 @@ function showQuestion() {
     answersEl.appendChild(btn);
   });
 
-  // Hide navigation buttons initially
   nextBtn.classList.add("hidden");
   resultBtn.classList.add("hidden");
 }
+
 
 // Next Question Handler
 document.getElementById("nextBtn").addEventListener("click", () => {
