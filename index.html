@@ -430,12 +430,25 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
         modelViewer.setAttribute("ios-src", models[selectedModel].usdz);
     });
 
-    function startAR() {
-    document.getElementById("cameraAlert").classList.remove("hidden");
+    <script>
+function startAR() {
+  document.getElementById("cameraAlert").classList.remove("hidden");
 }
+
 function proceedAR() {
-    document.getElementById("cameraAlert").classList.add("hidden");
-    // AR experience continues through model-viewer’s native AR button
+  document.getElementById("cameraAlert").classList.add("hidden");
+
+  const modelViewer = document.getElementById("model-viewer");
+
+  // Trigger AR via link fallback based on device
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const arUrl = isIOS ? modelViewer.getAttribute("ios-src") : modelViewer.getAttribute("src");
+
+  // Open in native AR viewer (Quick Look for iOS or Scene Viewer for Android)
+  window.open(arUrl, "_blank");
+}
+</script>
+
 
 }
 
