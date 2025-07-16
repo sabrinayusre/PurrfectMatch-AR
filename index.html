@@ -443,8 +443,8 @@ function proceedAR() {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const arUrl = isIOS ? modelViewer.getAttribute("ios-src") : modelViewer.getAttribute("src");
 
-  // Open AR model in a new tab (native AR viewer)
-  window.open(arUrl, "_blank");
+    document.getElementById('model-viewer').activateAR();
+
 }
 </script>
 
