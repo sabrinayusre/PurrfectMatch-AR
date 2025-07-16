@@ -438,16 +438,8 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 }
 function proceedAR() {
     document.getElementById("cameraAlert").classList.add("hidden");
+    // AR experience continues through model-viewer’s native AR button
 
-    const modelViewer = document.getElementById("model-viewer");
-    if (modelViewer.hasAttribute("ar")) {
-        modelViewer.activateAR();
-    } else {
-        const arUrl = /iPhone|iPad|iPod/i.test(navigator.userAgent)
-            ? modelViewer.getAttribute("ios-src")
-            : modelViewer.getAttribute("src");
-        window.open(arUrl, "_blank");
-    }
 }
 
 </script>
