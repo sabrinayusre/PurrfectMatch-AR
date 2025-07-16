@@ -317,13 +317,11 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
   // Show result only after quiz is completed
   document.getElementById("quizResult").classList.remove("hidden");
   document.getElementById("breedName").textContent = breed;
-  document.getElementById("viewCatLink").href = breed.toLowerCase() + "-cat.php";
 });
 </script>
 
 <div id="quizResult" class="mt-6 text-center hidden">
         <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
-        <a id="viewCatLink" href="#" class="text-blue-600 underline mt-2 inline-block">View your cat!</a>
     </div>
 
     <hr class="short-line" />
