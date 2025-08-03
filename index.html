@@ -50,7 +50,15 @@ header.hero {
 .btn-orange {
   background-color: #FF9800;
   color: white;
-  width: 250px;
+  max-width: 100%;
+  width: 100%;
+  max-width: 250px; /* Optional: Keeps a nice upper limit */
+  display: inline-block;
+  padding: 12px 24px;
+  text-align: center;
+  border-radius: 20px;
+}
+
 }
 .btn-orange:hover {
   background-color: #E68900;
@@ -563,3 +571,4 @@ function proceedAR() {
 </footer>
 
 </html>
+
