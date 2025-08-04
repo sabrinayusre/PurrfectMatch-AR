@@ -259,7 +259,6 @@ function startQuiz() {
   showQuestion();
 }
 
-
 function showQuestion() {
   const qData = quizData[currentQuestion];
   const questionEl = document.getElementById("questionText");
@@ -270,7 +269,6 @@ function showQuestion() {
   questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
   answersEl.innerHTML = "";
 
-  // Hide buttons initially
   nextBtn.classList.add("hidden");
   resultBtn.classList.add("hidden");
 
@@ -285,7 +283,6 @@ function showQuestion() {
       document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
 
-      // Check if all previous questions have answers
       const allPreviousAnswered = answers.slice(0, currentQuestion).every(ans => ans !== undefined);
 
       if (currentQuestion === quizData.length - 1 && allPreviousAnswered) {
@@ -299,15 +296,12 @@ function showQuestion() {
     answersEl.appendChild(btn);
   });
 
-  // If already answered, pre-select the button
   if (answers[currentQuestion]) {
-    // Find the button with the selected answer and add 'selected' class
     [...answersEl.children].forEach(button => {
       if (button.textContent === answers[currentQuestion]) {
         button.classList.add("selected");
       }
     });
-    // Show buttons accordingly (for revisiting a question)
     const allPreviousAnswered = answers.slice(0, currentQuestion).every(ans => ans !== undefined);
     if (currentQuestion === quizData.length - 1 && allPreviousAnswered) {
       resultBtn.classList.remove("hidden");
@@ -319,9 +313,6 @@ function showQuestion() {
   }
 }
 
-
-
-// Next Question Handler
 document.getElementById("nextBtn").addEventListener("click", () => {
   if (answers[currentQuestion]) {
     currentQuestion++;
@@ -331,7 +322,6 @@ document.getElementById("nextBtn").addEventListener("click", () => {
   }
 });
 
-
 document.getElementById("quizForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -339,10 +329,6 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
     alert("Please answer all questions before viewing your results.");
     return;
   }
-
-  // Your scoring logic here...
-});
-
 
   // Score logic
   const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
@@ -354,11 +340,15 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 
   const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
 
-  // Show result only after quiz is completed
   document.getElementById("quizResult").classList.remove("hidden");
   document.getElementById("breedName").textContent = breed;
 });
 </script>
+
+
+  // Show result only after quiz is completed
+  document.getElementById("quizResult").classList.remove("hidden");
+  document.getElementById("breedName").textContent = breed;
 
 <div id="quizResult" class="mt-6 text-center hidden">
         <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
@@ -603,6 +593,7 @@ function proceedAR() {
 </footer>
 
 </html>
+
 
 
 
