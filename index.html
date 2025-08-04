@@ -59,6 +59,7 @@ header.hero {
   border-radius: 20px;
 }
 
+}
 .btn-orange:hover {
   background-color: #E68900;
 }
@@ -245,188 +246,114 @@ nav.menu a:hover {
     <div id="answerButtons" class="flex flex-col gap-2"></div>
     <div class="text-center mt-6">
       <button type="button" id="nextBtn" class="btn btn-orange hidden">Next Question</button>
-      <button id="resultBtn" class="hidden mt-4 bg-green-500 text-white px-4 py-2 rounded">View My Results</button>
-
+      <button type="submit" id="resultBtn" class="btn btn-orange hidden">View My Results</button>
     </div>
   </form>
 </section>
 
 
 <script>
-  const quizData = [
-    {
-      question: "How would you describe your ideal weekend?",
-      options: ["Relaxing at home", "Exploring the outdoors", "Trying new hobbies", "Spending time with friends"]
-    },
-    {
-      question: "What's your favorite type of weather?",
-      options: ["Sunny and warm", "Cool and breezy", "Rainy and cozy", "Snowy and magical"]
-    },
-    {
-      question: "Which activity do you enjoy the most?",
-      options: ["Reading a book", "Going for a walk", "Playing games", "Watching movies"]
-    },
-    {
-      question: "Pick a color that resonates with you.",
-      options: ["Blue", "Green", "Yellow", "Purple"]
-    },
-    {
-      question: "How do you handle challenges?",
-      options: ["Stay calm and think", "Ask for help", "Take a break", "Push through it"]
-    },
-    {
-      question: "What kind of music do you like?",
-      options: ["Classical", "Pop", "Indie", "Rock"]
-    },
-    {
-      question: "Choose a pet quality you admire.",
-      options: ["Loyalty", "Playfulness", "Curiosity", "Gentleness"]
-    },
-    {
-      question: "How do you usually start your day?",
-      options: ["With coffee or tea", "Exercise or stretching", "Checking my phone", "Sleeping in"]
-    }
-  ];
+const quizData = [
+  { q: "What’s your ideal weekend?", a: ["Exploring outdoors", "Relaxing at home", "Café hopping"] },
+  { q: "Pick a personality trait:", a: ["Adventurous", "Gentle", "Charming"] },
+  { q: "What's your energy level like?", a: ["High and active", "Balanced", "Calm and lazy"] },
+  { q: "Choose a hobby:", a: ["Hiking or sports", "Reading or gaming", "Socializing"] },
+  { q: "Your favorite time of day?", a: ["Morning", "Evening", "Night"] },
+  { q: "How do you react to new people?", a: ["Curious and bold", "Shy but friendly", "Cautious"] },
+  { q: "Pick a cozy spot:", a: ["Sunny windowsill", "Comfy bed", "By the fireplace"] },
+  { q: "What role do you play in a group?", a: ["Leader", "Supporter", "Entertainer"] }
+];
 
-  const quizContainer = document.getElementById("quiz");
+let currentQuestion = 0;
+const answers = [];
+
+function startQuiz() {
+  document.getElementById("quizStart").classList.add("hidden");
+  document.getElementById("quizContainer").classList.remove("hidden");
+  showQuestion();
+}
+
+
+function showQuestion() {
+  const qData = quizData[currentQuestion];
+  const questionEl = document.getElementById("questionText");
+  const answersEl = document.getElementById("answerButtons");
   const nextBtn = document.getElementById("nextBtn");
   const resultBtn = document.getElementById("resultBtn");
-  const progress = document.getElementById("progress");
-  const resultSection = document.getElementById("resultSection");
 
-  let currentQuestion = 0;
-  let answers = [];
+  questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
+  answersEl.innerHTML = "";
 
-  function showQuestion() {
-    quizContainer.innerHTML = "";
-    const question = quizData[currentQuestion];
-    const questionElement = document.createElement("div");
-    questionElement.innerHTML = `<p class="text-lg mb-4 font-semibold">${question.question}</p>`;
-    quizContainer.appendChild(questionElement);
+  qData.a.forEach(option => {
+    const btn = document.createElement("button");
+    btn.className = "quiz-btn";
+    btn.textContent = option;
+    btn.type = "button";
 
-    question.options.forEach((option) => {
-      const btn = document.createElement("button");
-      btn.innerText = option;
-      btn.classList.add(
-        "quiz-btn",
-        "bg-white",
-        "text-pink-700",
-        "px-4",
-        "py-2",
-        "rounded",
-        "shadow",
-        "hover:bg-pink-100",
-        "transition"
-      );
+    btn.onclick = () => {
+  answers[currentQuestion] = option;
+  document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
 
-      if (answers[currentQuestion] === option) {
-        btn.classList.add("selected");
-      }
-
-      btn.onclick = () => {
-        answers[currentQuestion] = option;
-        document.querySelectorAll(".quiz-btn").forEach((b) =>
-          b.classList.remove("selected")
-        );
-        btn.classList.add("selected");
-
-        if (currentQuestion === quizData.length - 1) {
-          resultBtn.classList.remove("hidden");
-          nextBtn.classList.add("hidden");
-        } else {
-          nextBtn.classList.remove("hidden");
-          resultBtn.classList.add("hidden");
-        }
-      };
-
-      quizContainer.appendChild(btn);
-    });
-
-    // Handle buttons on reload
-    if (currentQuestion === quizData.length - 1 && answers[currentQuestion]) {
-      resultBtn.classList.remove("hidden");
-      nextBtn.classList.add("hidden");
-    } else {
-      resultBtn.classList.add("hidden");
-      nextBtn.classList.remove("hidden");
-    }
-
-    updateProgressBar();
-  }
-
-  function updateProgressBar() {
-    const progressPercentage = ((currentQuestion + 1) / quizData.length) * 100;
-    progress.style.width = `${progressPercentage}%`;
-  }
-
-  nextBtn.onclick = () => {
-    if (answers[currentQuestion]) {
-      currentQuestion++;
-      showQuestion();
-    } else {
-      alert("Please select an answer before continuing.");
-    }
-  };
-
-  resultBtn.onclick = () => {
-    if (!answers[currentQuestion]) {
-      alert("Please select an answer first.");
-      return;
-    }
-
-    // Simple scoring system for demo purposes
-    const counts = {};
-    answers.forEach((answer) => {
-      counts[answer] = (counts[answer] || 0) + 1;
-    });
-
-    const topAnswer = Object.keys(counts).reduce((a, b) =>
-      counts[a] > counts[b] ? a : b
-    );
-
-    let resultText = "";
-    switch (topAnswer) {
-      case "Relaxing at home":
-      case "Rainy and cozy":
-      case "Reading a book":
-      case "Classical":
-        resultText = "You're most like a Ragdoll cat — calm, affectionate, and love cozy environments.";
-        break;
-      case "Exploring the outdoors":
-      case "Cool and breezy":
-      case "Going for a walk":
-      case "Playfulness":
-        resultText = "You're like a Bengal cat — adventurous, playful, and full of energy.";
-        break;
-      case "Trying new hobbies":
-      case "Indie":
-      case "Curiosity":
-        resultText = "You're like a Siamese cat — curious, intelligent, and love engaging with your surroundings.";
-        break;
-      case "Spending time with friends":
-      case "Pop":
-      case "Gentleness":
-        resultText = "You're like a Persian cat — gentle, social, and enjoy company.";
-        break;
-      default:
-        resultText = "You're a unique mix — just like a Domestic Shorthair cat!";
-        break;
-    }
-
-    quizContainer.classList.add("hidden");
+  if (currentQuestion === quizData.length - 1) {
     nextBtn.classList.add("hidden");
+    resultBtn.classList.remove("hidden");
+  } else {
+    nextBtn.classList.remove("hidden");
     resultBtn.classList.add("hidden");
-    resultSection.classList.remove("hidden");
-    resultSection.innerHTML = `
-      <h2 class="text-xl font-bold mb-2">Your Result</h2>
-      <p class="text-lg">${resultText}</p>
-    `;
-  };
+  }
+};
 
-  // Start the quiz
-  showQuestion();
+
+  // Only show "View My Results" if a choice has been selected
+  if (answers[currentQuestion]) {
+    resultBtn.classList.remove("hidden");
+  } else {
+    resultBtn.classList.add("hidden");
+  }
+} else {
+  nextBtn.classList.remove("hidden");
+  resultBtn.classList.add("hidden");
+}
+
+    };
+    answersEl.appendChild(btn);
+  });
+
+  nextBtn.classList.add("hidden");
+  resultBtn.classList.add("hidden");
+}
+
+
+// Next Question Handler
+document.getElementById("nextBtn").addEventListener("click", () => {
+  if (answers[currentQuestion]) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    alert("Please select an answer.");
+  }
+});
+
+// Form Submission — Show Results
+document.getElementById("quizForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // Score logic
+  const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
+  answers.forEach(ans => {
+    if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
+    if (["Relaxing at home", "Gentle", "Balanced", "Reading or gaming", "Evening", "Shy but friendly", "Comfy bed", "Supporter"].includes(ans)) breedScores.Siamese++;
+    if (["Café hopping", "Charming", "Calm and lazy", "Socializing", "Night", "Cautious", "By the fireplace", "Entertainer"].includes(ans)) breedScores.Calico++;
+  });
+
+  const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
+
+  // Show result only after quiz is completed
+  document.getElementById("quizResult").classList.remove("hidden");
+  document.getElementById("breedName").textContent = breed;
+});
 </script>
-
 
 <div id="quizResult" class="mt-6 text-center hidden">
         <p class="text-xl font-semibold">You are a <span id="breedName" class="text-orange-500"></span> cat! 🐱</p>
@@ -671,11 +598,4 @@ function proceedAR() {
 </footer>
 
 </html>
-
-
-
-
-
-
-
 
