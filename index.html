@@ -305,12 +305,8 @@ function showQuestion() {
       btn.classList.add("selected");
 
       if (currentQuestion === quizData.length - 1) {
-        // Last question, show result button only if answered
-        if (answers[currentQuestion]) {
-          resultBtn.classList.remove("hidden");
-        } else {
-          resultBtn.classList.add("hidden");
-        }
+        // Show result button only when last question is answered
+        resultBtn.classList.remove("hidden");
         nextBtn.classList.add("hidden");
       } else {
         nextBtn.classList.remove("hidden");
@@ -320,21 +316,9 @@ function showQuestion() {
     quizContainer.appendChild(btn);
   });
 
-  // On render, hide/show buttons based on question and answer
-  if (currentQuestion === quizData.length - 1) {
-    if (answers[currentQuestion]) {
-      resultBtn.classList.remove("hidden");
-    } else {
-      resultBtn.classList.add("hidden");
-    }
-    nextBtn.classList.add("hidden");
-  } else {
-    resultBtn.classList.add("hidden");
-    nextBtn.classList.remove("hidden");
-  }
+  // Initial check to hide/show buttons
+  if (currentQuestion === quizData.le
 
-  updateProgressBar();
-}
 
 
 // Next Question Handler
@@ -608,6 +592,7 @@ function proceedAR() {
 </footer>
 
 </html>
+
 
 
 
