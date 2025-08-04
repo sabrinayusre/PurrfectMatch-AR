@@ -282,12 +282,13 @@ function showQuestion() {
 
     btn.onclick = () => {
       answers[currentQuestion] = option;
-      // Remove selection from all buttons, then select current
       document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
 
-      // Show next or result button only after answer selected
-      if (currentQuestion === quizData.length - 1) {
+      // Check if all previous questions have answers
+      const allPreviousAnswered = answers.slice(0, currentQuestion).every(ans => ans !== undefined);
+
+      if (currentQuestion === quizData.length - 1 && allPreviousAnswered) {
         resultBtn.classList.remove("hidden");
         nextBtn.classList.add("hidden");
       } else {
@@ -297,7 +298,27 @@ function showQuestion() {
     };
     answersEl.appendChild(btn);
   });
+
+  // If already answered, pre-select the button
+  if (answers[currentQuestion]) {
+    // Find the button with the selected answer and add 'selected' class
+    [...answersEl.children].forEach(button => {
+      if (button.textContent === answers[currentQuestion]) {
+        button.classList.add("selected");
+      }
+    });
+    // Show buttons accordingly (for revisiting a question)
+    const allPreviousAnswered = answers.slice(0, currentQuestion).every(ans => ans !== undefined);
+    if (currentQuestion === quizData.length - 1 && allPreviousAnswered) {
+      resultBtn.classList.remove("hidden");
+      nextBtn.classList.add("hidden");
+    } else {
+      nextBtn.classList.remove("hidden");
+      resultBtn.classList.add("hidden");
+    }
+  }
 }
+
 
 
 // Next Question Handler
@@ -311,9 +332,17 @@ document.getElementById("nextBtn").addEventListener("click", () => {
 });
 
 
-// Form Submission — Show Results
 document.getElementById("quizForm").addEventListener("submit", function (e) {
   e.preventDefault();
+
+  if (answers.length !== quizData.length || answers.includes(undefined)) {
+    alert("Please answer all questions before viewing your results.");
+    return;
+  }
+
+  // Your scoring logic here...
+});
+
 
   // Score logic
   const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
@@ -574,6 +603,7 @@ function proceedAR() {
 </footer>
 
 </html>
+
 
 
 
