@@ -59,7 +59,6 @@ header.hero {
   border-radius: 20px;
 }
 
-}
 .btn-orange:hover {
   background-color: #E68900;
 }
@@ -273,7 +272,6 @@ function startQuiz() {
   showQuestion();
 }
 
-
 function showQuestion() {
   const qData = quizData[currentQuestion];
   const questionEl = document.getElementById("questionText");
@@ -281,9 +279,13 @@ function showQuestion() {
   const nextBtn = document.getElementById("nextBtn");
   const resultBtn = document.getElementById("resultBtn");
 
+  // Reset question and buttons
   questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
   answersEl.innerHTML = "";
+  nextBtn.classList.add("hidden");
+  resultBtn.classList.add("hidden");
 
+  // Render answer options
   qData.a.forEach(option => {
     const btn = document.createElement("button");
     btn.className = "quiz-btn";
@@ -291,10 +293,12 @@ function showQuestion() {
     btn.type = "button";
 
     btn.onclick = () => {
-  answers[currentQuestion] = option;
+      // Store answer and highlight selection
+      answers[currentQuestion] = option;
       document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
       btn.classList.add("selected");
 
+      // Button visibility logic
       if (currentQuestion === quizData.length - 1) {
         resultBtn.classList.remove("hidden");
         nextBtn.classList.add("hidden");
@@ -302,27 +306,11 @@ function showQuestion() {
         nextBtn.classList.remove("hidden");
         resultBtn.classList.add("hidden");
       }
-
-
-  // Only show "View My Results" if a choice has been selected
-  if (answers[currentQuestion]) {
-    resultBtn.classList.remove("hidden");
-  } else {
-    resultBtn.classList.add("hidden");
-  }
-} else {
-  nextBtn.classList.remove("hidden");
-  resultBtn.classList.add("hidden");
-}
-
     };
+
     answersEl.appendChild(btn);
   });
-
-  nextBtn.classList.add("hidden");
-  resultBtn.classList.add("hidden");
 }
-
 
 // Next Question Handler
 document.getElementById("nextBtn").addEventListener("click", () => {
@@ -338,7 +326,6 @@ document.getElementById("nextBtn").addEventListener("click", () => {
 document.getElementById("quizForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // Score logic
   const breedScores = { Tabby: 0, Siamese: 0, Calico: 0 };
   answers.forEach(ans => {
     if (["Exploring outdoors", "Adventurous", "High and active", "Hiking or sports", "Morning", "Curious and bold", "Sunny windowsill", "Leader"].includes(ans)) breedScores.Tabby++;
@@ -348,7 +335,6 @@ document.getElementById("quizForm").addEventListener("submit", function (e) {
 
   const breed = Object.keys(breedScores).reduce((a, b) => breedScores[a] > breedScores[b] ? a : b);
 
-  // Show result only after quiz is completed
   document.getElementById("quizResult").classList.remove("hidden");
   document.getElementById("breedName").textContent = breed;
 });
@@ -597,6 +583,7 @@ function proceedAR() {
 </footer>
 
 </html>
+
 
 
 
