@@ -292,17 +292,16 @@ function showQuestion() {
 
     btn.onclick = () => {
   answers[currentQuestion] = option;
-  document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
-  btn.classList.add("selected");
+      document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
 
-  if (currentQuestion === quizData.length - 1) {
-    nextBtn.classList.add("hidden");
-    resultBtn.classList.remove("hidden");
-  } else {
-    nextBtn.classList.remove("hidden");
-    resultBtn.classList.add("hidden");
-  }
-};
+      if (currentQuestion === quizData.length - 1) {
+        resultBtn.classList.remove("hidden");
+        nextBtn.classList.add("hidden");
+      } else {
+        nextBtn.classList.remove("hidden");
+        resultBtn.classList.add("hidden");
+      }
 
 
   // Only show "View My Results" if a choice has been selected
@@ -598,5 +597,6 @@ function proceedAR() {
 </footer>
 
 </html>
+
 
 
