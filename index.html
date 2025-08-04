@@ -159,20 +159,7 @@ nav.menu a:hover {
     margin-right: auto;
     width: 100%;
   }
-        <style>
-    body {
-      margin: 0;
-      background-color: #fefefe;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    model-viewer {
-      width: 100%;
-      max-width: 600px;
-      height: 500px;
-    }
+}
     </style>
 </head>
 <body class="m-0">
@@ -291,31 +278,17 @@ function showQuestion() {
     btn.type = "button";
 
     btn.onclick = () => {
-  answers[currentQuestion] = option;
-  document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
-  btn.classList.add("selected");
+      answers[currentQuestion] = option;
+      document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
 
-  if (currentQuestion === quizData.length - 1) {
-    nextBtn.classList.add("hidden");
-    resultBtn.classList.remove("hidden");
-  } else {
-    nextBtn.classList.remove("hidden");
-    resultBtn.classList.add("hidden");
-  }
-};
-
-
-  // Only show "View My Results" if a choice has been selected
-  if (answers[currentQuestion]) {
-    resultBtn.classList.remove("hidden");
-  } else {
-    resultBtn.classList.add("hidden");
-  }
-} else {
-  nextBtn.classList.remove("hidden");
-  resultBtn.classList.add("hidden");
-}
-
+      if (currentQuestion === quizData.length - 1) {
+        resultBtn.classList.remove("hidden");
+        nextBtn.classList.add("hidden");
+      } else {
+        nextBtn.classList.remove("hidden");
+        resultBtn.classList.add("hidden");
+      }
     };
     answersEl.appendChild(btn);
   });
@@ -598,4 +571,3 @@ function proceedAR() {
 </footer>
 
 </html>
-
