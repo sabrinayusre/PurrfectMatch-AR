@@ -245,7 +245,8 @@ nav.menu a:hover {
     <div id="answerButtons" class="flex flex-col gap-2"></div>
     <div class="text-center mt-6">
       <button type="button" id="nextBtn" class="btn btn-orange hidden">Next Question</button>
-      <button type="submit" id="resultBtn" class="btn btn-orange hidden">View My Results</button>
+      <button id="resultBtn" class="hidden mt-4 bg-green-500 text-white px-4 py-2 rounded">View My Results</button>
+
     </div>
   </form>
 </section>
@@ -273,44 +274,68 @@ function startQuiz() {
 }
 
 function showQuestion() {
-  const qData = quizData[currentQuestion];
-  const questionEl = document.getElementById("questionText");
-  const answersEl = document.getElementById("answerButtons");
-  const nextBtn = document.getElementById("nextBtn");
-  const resultBtn = document.getElementById("resultBtn");
+  quizContainer.innerHTML = "";
+  const question = quizData[currentQuestion];
+  const questionElement = document.createElement("div");
+  questionElement.innerHTML = `<p class="text-lg mb-4 font-semibold">${question.question}</p>`;
+  quizContainer.appendChild(questionElement);
 
-  // Reset question and buttons
-  questionEl.textContent = `${currentQuestion + 1}. ${qData.q}`;
-  answersEl.innerHTML = "";
-  nextBtn.classList.add("hidden");
-  resultBtn.classList.add("hidden");
-
-  // Render answer options
-  qData.a.forEach(option => {
+  question.options.forEach((option) => {
     const btn = document.createElement("button");
-    btn.className = "quiz-btn";
-    btn.textContent = option;
-    btn.type = "button";
-
+    btn.innerText = option;
+    btn.classList.add(
+      "quiz-btn",
+      "bg-white",
+      "text-pink-700",
+      "px-4",
+      "py-2",
+      "rounded",
+      "shadow",
+      "hover:bg-pink-100",
+      "transition"
+    );
+    if (answers[currentQuestion] === option) {
+      btn.classList.add("selected");
+    }
     btn.onclick = () => {
-      // Store answer and highlight selection
       answers[currentQuestion] = option;
-      document.querySelectorAll(".quiz-btn").forEach(b => b.classList.remove("selected"));
+      document.querySelectorAll(".quiz-btn").forEach((b) =>
+        b.classList.remove("selected")
+      );
       btn.classList.add("selected");
 
-      // Button visibility logic
       if (currentQuestion === quizData.length - 1) {
-        resultBtn.classList.remove("hidden");
+        // Last question, show result button only if answered
+        if (answers[currentQuestion]) {
+          resultBtn.classList.remove("hidden");
+        } else {
+          resultBtn.classList.add("hidden");
+        }
         nextBtn.classList.add("hidden");
       } else {
         nextBtn.classList.remove("hidden");
         resultBtn.classList.add("hidden");
       }
     };
-
-    answersEl.appendChild(btn);
+    quizContainer.appendChild(btn);
   });
+
+  // On render, hide/show buttons based on question and answer
+  if (currentQuestion === quizData.length - 1) {
+    if (answers[currentQuestion]) {
+      resultBtn.classList.remove("hidden");
+    } else {
+      resultBtn.classList.add("hidden");
+    }
+    nextBtn.classList.add("hidden");
+  } else {
+    resultBtn.classList.add("hidden");
+    nextBtn.classList.remove("hidden");
+  }
+
+  updateProgressBar();
 }
+
 
 // Next Question Handler
 document.getElementById("nextBtn").addEventListener("click", () => {
@@ -583,6 +608,7 @@ function proceedAR() {
 </footer>
 
 </html>
+
 
 
 
